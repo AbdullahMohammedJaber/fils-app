@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' data: blob: filesystem:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline';
+    media-src *;
+    img-src * data: blob:;
+    connect-src *;
+  ">
+    <meta name="referrer" content="no-referrer" />
+    <title>Live Broadcast</title>
+    <style>
+    body {
+      margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
+      height: 100vh; background-color: #000; flex-direction: column;
+    }
+    video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .controls {
+      position: absolute; top: 10px; left: 10px; z-index: 1; display: flex; gap: 15px;
+      flex-wrap: wrap;
+    }
+    button {
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none; padding: 10px 15px;
+      border-radius: 5px; cursor: pointer; font-size: 16px;
+    }
+    button:hover {
+      background-color: rgba(255, 255, 255, 1);
+    }
+  </style>
+</head>
+<body>
+
+<video id="video" autoplay muted playsinline></video>
+
+<div class="controls">
+    <button onclick="switchCamera()">Switch Camera</button>
+    <button onclick="toggleOrientation()">Toggle Orientation</button>
+    <button onclick="toggleMute()">Toggle Mute</button>
+    <button onclick="stopBroadcast()">Stop Broadcast</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flv.js@latest"></script>
+
+<script>
+    let videoElement = document.getElementById('video');
+    let currentStream;
+    let isMuted = false;
+    let isFrontCamera = true;
+    let mediaDevices = navigator.mediaDevices;
+    let rtmpUrl = '';  // RTMP URL of AWS IVS
+    let streamKey = '';  // Stream key
+
+    // Listen for incoming data from Flutter
+    window.addEventListener("message", (event) => {
+        if (!event.data) return;
+        const { type, ingestEndpoint, streamKey: key } = event.data;
+        if (type === "startBroadcast" && ingestEndpoint && key) {
+            rtmpUrl = ingestEndpoint;
+            streamKey = key;
+            startBroadcast(); // Start the broadcast
+        }
+    });
+
+    // Start video broadcast
+    function startBroadcast() {
+      if (!rtmpUrl || !streamKey) {
+        alert("Invalid RTMP URL or Stream Key");
+        return;
+      }
+
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+          currentStream = stream;
+          videoElement.srcObject = stream;
+
+          const rtmpStreamUrl = `${rtmpUrl}/${streamKey}`;
+          startRtmpStreaming(rtmpStreamUrl, stream);
+        })
+        .catch(error => {
+          console.error('Permission error:', error.name, error.message);
+          alert(`Error: ${error.name} - ${error.message}\nيرجى منح صلاحية الكاميرا والمايكروفون للتطبيق.`);
+        });
+    }
+
+    // Start RTMP streaming with flv.js
+    function startRtmpStreaming(rtmpStreamUrl, stream) {
+      if (flvjs.isSupported()) {
+        let flvPlayer = flvjs.createPlayer({
+          type: 'flv',
+          url: rtmpStreamUrl,
+          isLive: true
+        });
+
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load();
+        flvPlayer.play();
+      } else {
+        console.error('flv.js is not supported in this browser.');
+      }
+    }
+
+    // Switch between front and rear camera
+    function switchCamera() {
+      if (!currentStream) return;
+
+      mediaDevices.enumerateDevices().then(devices => {
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+        const newDevice = isFrontCamera ? videoDevices[1] : videoDevices[0];
+
+        if (newDevice) {
+          isFrontCamera = !isFrontCamera;
+          const constraints = {
+            video: { deviceId: { exact: newDevice.deviceId } },
+            audio: true
+          };
+
+          currentStream.getTracks().forEach(track => track.stop());
+
+          navigator.mediaDevices.getUserMedia(constraints)
+            .then(newStream => {
+              currentStream = newStream;
+              videoElement.srcObject = newStream;
+            })
+            .catch(error => {
+              console.error('Failed to switch camera:', error);
+              alert(`Switch camera error: ${error.message}`);
+            });
+        }
+      });
+    }
+
+    // Toggle microphone mute/unmute
+    function toggleMute() {
+      if (!currentStream) return;
+      const audioTrack = currentStream.getAudioTracks()[0];
+      if (audioTrack) {
+        isMuted = !isMuted;
+        audioTrack.enabled = !isMuted;
+      }
+    }
+
+    // Toggle screen orientation manually
+    function toggleOrientation() {
+      document.body.classList.toggle('landscape');
+      if (document.body.classList.contains('landscape')) {
+        document.body.style.transform = "rotate(90deg)";
+        document.body.style.width = "100vh";
+        document.body.style.height = "100vw";
+      } else {
+        document.body.style.transform = "rotate(0deg)";
+        document.body.style.width = "100%";
+        document.body.style.height = "100%";
+      }
+    }
+
+    // Stop the broadcast
+    function stopBroadcast() {
+      if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+        videoElement.srcObject = null;
+        alert('تم إيقاف البث.');
+      }
+    }
+</script>
+
+</body>
+</html>

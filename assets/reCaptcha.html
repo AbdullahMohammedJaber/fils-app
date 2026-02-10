@@ -1,0 +1,22 @@
+<!-- assets/captcha.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+</head>
+<body>
+<form action="?" method="POST">
+    <div class="g-recaptcha"
+         data-sitekey="YOUR_SITE_KEY"
+         data-callback="captchaSuccess">
+    </div>
+</form>
+
+<script>
+      function captchaSuccess(token) {
+        // send token back to Flutter
+        Captcha.postMessage(token);
+      }
+    </script>
+</body>
+</html>
