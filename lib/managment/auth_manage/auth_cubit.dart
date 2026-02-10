@@ -321,6 +321,45 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+
+Future<void> signInApple() async {
+  showBoatToast();  
+  final user = await SochialGoogleAppleLogin.signInWithApple();
+  closeAllLoading(); 
+
+  if (user != null) {
+    showBoatToast(); 
+
+    final result = await UserCase().authUserCase.socialLogin(
+      socialAuth: SocialAuth(
+        providerId: user.credential!.providerId,
+        accessSecret: user.credential!.token ?? "",
+        accessToken: user.credential!.accessToken ?? "",
+        socialProvider: 'apple', 
+        userType: userType.name,
+      ),
+    );
+    closeAllLoading();
+
+    result.handle(
+      onSuccess: (data) {
+        UserResponse userResponse = UserResponse.fromJson(data);
+        setUserStorage(userResponse);
+        showMessage(data['message'], value: true);
+        ToRemoveAll(AppRoutes.rootGeneral);
+      },
+      onFailed: (message) {
+        showMessage(message, value: false);
+      },
+      onNoInternet: () {
+        showMessage(StringApp.noInternet, value: false);
+      },
+    );
+  } else {
+    showMessage("Login failed", value: false);
+  }
+}
+
   Future<void> signInGoogle() async {
     showBoatToast();
     final user = await SochialGoogleAppleLogin.signInWithGoogle();

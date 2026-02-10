@@ -14,6 +14,8 @@ class AppRoutes {
   static const String rootGeneral = '/root';
   static const String addMoneyWallet = '/addMoneyWallet';
   static const String webViewWallet = '/webViewWallet';
+  static const String webViewAuction = '/webViewAuction';
+
   static const String addAccountWallet = '/addAccountWallet';
   static const String orderC = '/orderC';
   static const String detailsProductRoot = '/detailsProductRoot';

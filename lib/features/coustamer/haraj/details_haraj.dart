@@ -173,7 +173,7 @@ class _DetailsHarajState extends State<DetailsHaraj> {
                       ),
                     ),
                     SizedBox(height: heigth * 0.05),
-                    if (details.addedBy == getUser()!.user!.name)
+                    if (isLogin()&& details.addedBy == getUser()!.user!.name)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: GestureDetector(

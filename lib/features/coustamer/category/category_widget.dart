@@ -33,7 +33,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   Widget build(BuildContext context) {
     
     return Container(
-      height: heigth * 0.2,
+      height: heigth * 0.13,
       padding: EdgeInsetsDirectional.only(start: 12),
       color: Colors.transparent,
       child: BlocBuilder<CategoryCubit, CategoryState>(
@@ -49,12 +49,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             );
           } else {
             return SizedBox(
-              height: 3 * 58,
+              height: 3 * 55,
               child: GridView.builder(
                 scrollDirection: Axis.horizontal,
 
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
+                  crossAxisCount: 2,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
                   childAspectRatio: 1 / 3,

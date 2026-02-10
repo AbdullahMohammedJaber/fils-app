@@ -9,6 +9,7 @@ import 'package:fils/core/data/response/auction/details_auction_response.dart';
 import 'package:fils/core/data/response/category/categoryResponse.dart';
 import 'package:fils/core/server/dio_helper.dart';
 import 'package:fils/core/user_case_state/coustomer/use_case_state.dart';
+import 'package:fils/features/coustamer/wallet/done_pay.dart';
 import 'package:fils/route/app_routes.dart';
 import 'package:fils/route/control_route.dart';
 
@@ -21,6 +22,7 @@ import 'package:fils/utils/navigation_service/navigation_server.dart';
 import 'package:fils/utils/setting_ui/loading_ui.dart';
 import 'package:fils/utils/storage.dart';
 import 'package:fils/utils/string.dart';
+import 'package:fils/utils/theme/color_manager.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -158,7 +160,7 @@ class AuctionCubit extends Cubit<AuctionState> {
 
   StreamSubscription<DatabaseEvent>? _bidsSubscription;
 
- double totalPriceBid = 0.0;
+  double totalPriceBid = 0.0;
 
   changeListenerToPriceBid() {
     totalPriceBid = 0.0;
@@ -196,7 +198,6 @@ class AuctionCubit extends Cubit<AuctionState> {
                 updatedBids.sort((a, b) => b.bid.bidAt.compareTo(a.bid.bidAt));
               }
 
-
               emit(
                 state.copyWith(
                   bids: updatedBids,
@@ -205,7 +206,6 @@ class AuctionCubit extends Cubit<AuctionState> {
                 ),
               );
               changeListenerToPriceBid();
-
             } catch (e) {
               emit(
                 state.copyWith(
@@ -271,8 +271,6 @@ class AuctionCubit extends Cubit<AuctionState> {
               for (var element in fetchedGifts) {
                 final giftId = element['gift_id'].toString();
                 if (!updatedGiftsId.contains(giftId)) {
-                  print("new gift ------------------");
-                  print(element['message']);
                   messageNewGift = element['message'];
                   amountNewGift = element['amount'].toString();
                   showGiftBox = true;
@@ -345,7 +343,7 @@ class AuctionCubit extends Cubit<AuctionState> {
           amount: amount,
           bid: bid,
         );
-      }else{
+      } else {
         print("=============> error");
       }
     } else {
@@ -356,30 +354,26 @@ class AuctionCubit extends Cubit<AuctionState> {
           value: false,
         );
         Future.delayed(Duration(seconds: 1), () async {
-           await payFee(state.detailsAuctionResponse!.data.id);
-           state.detailsAuctionResponse!.data.isPaidAssuranceFee = true;
-         
+          await payFee(state.detailsAuctionResponse!.data.id);
         });
       } else {
-   
-          if (state.bids.isNotEmpty) {
-            amount = bid + state.totalPriceBid;
-          } else {
-            amount =
-                bid +
-                extractDouble(state.detailsAuctionResponse!.data.minBidPrice);
-          }
-          if (checkBid(bid)) {
-            printGreen("Done Place Bid");
-            sendBidServer(
-              idAuction: state.detailsAuctionResponse!.data.id,
-              amount: amount,
-              bid: bid,
-            );
-          }else{
-            print("error2");
-          }
-       
+        if (state.bids.isNotEmpty) {
+          amount = bid + state.totalPriceBid;
+        } else {
+          amount =
+              bid +
+              extractDouble(state.detailsAuctionResponse!.data.minBidPrice);
+        }
+        if (checkBid(bid)) {
+          printGreen("Done Place Bid");
+          sendBidServer(
+            idAuction: state.detailsAuctionResponse!.data.id,
+            amount: amount,
+            bid: bid,
+          );
+        } else {
+          print("error2");
+        }
       }
     }
   }
@@ -415,7 +409,6 @@ class AuctionCubit extends Cubit<AuctionState> {
   }
 
   Future<void> payFee(int id) async {
-    
     showBoatToast();
     DioClient dioClient = DioClient();
     final result = await dioClient.request(
@@ -426,10 +419,46 @@ class AuctionCubit extends Cubit<AuctionState> {
     closeAllLoading();
     if (result.isSuccess) {
       ToWithFade(
-        AppRoutes.webViewWallet,
+        AppRoutes.webViewAuction,
         arguments: [result.data['link'], PaymentType.auction],
       );
-    }  
+    }
+  }
+
+  Future<void> functionWebView({
+    required String url,
+    PaymentType paymentType = PaymentType.cart,
+  }) async {
+    final DioClient dioClient = DioClient();
+
+    Navigator.pop(NavigationService.navigatorKey.currentContext!);
+    showBoatToast();
+    final response = await dioClient.request(path: url, method: 'GET');
+    closeAllLoading();
+    if (response.statusCode == 200) {
+     
+        showMessage("Done".tr(), value: true);
+        state.detailsAuctionResponse!.data.isPaidAssuranceFee = true;
+   
+    } else {
+      showModalBottomSheet(
+        context: NavigationService.navigatorKey.currentContext!,
+        elevation: 1,
+        isDismissible: true,
+        isScrollControlled: true,
+        backgroundColor: white,
+        constraints: BoxConstraints(maxHeight: heigth * 0.6),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
+        ),
+        builder: (context) {
+          return const faieldPay();
+        },
+      );
+    }
   }
 
   Future<void> sendBidServer({

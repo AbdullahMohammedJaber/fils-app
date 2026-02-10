@@ -7,6 +7,7 @@ import 'package:fils/features/authentication/login/login_screen.dart';
 import 'package:fils/features/coustamer/auction/details_auction.dart';
 import 'package:fils/features/coustamer/auction/form_add_auction/form_add_auction_coustomer.dart';
 import 'package:fils/features/coustamer/auction/room_auction/normal_auction/room_auction_screen.dart';
+import 'package:fils/features/coustamer/auction/web_view_auction.dart';
 import 'package:fils/features/coustamer/check_out/payment_methode.dart';
 import 'package:fils/features/coustamer/haraj/details_haraj.dart';
 import 'package:fils/features/coustamer/haraj/haraj_in_category.dart';
@@ -197,6 +198,9 @@ class NavigationService {
       case AppRoutes.webViewWallet:
         final data = arguments as List;
         return PaymentWebViewWallet(urlPayment: data[0], paymentType: data[1]);
+         case AppRoutes.webViewAuction:
+        final data = arguments as List;
+        return PaymentWebViewAuction(urlPayment: data[0], paymentType: data[1]);
       case AppRoutes.allProductStore:
         final store = arguments as List;
         return AllProductStore(idStore: store[0], nameStore: store[1]);

@@ -6,6 +6,7 @@ import 'package:fils/managment/app_manage/app_cubit.dart';
 import 'package:fils/managment/auth_manage/auth_cubit.dart';
 import 'package:fils/managment/auth_manage/auth_state.dart';
 import 'package:fils/route/app_routes.dart';
+import 'package:fils/utils/storage.dart';
 
 import 'package:fils/utils/string.dart';
 import 'package:flutter/gestures.dart';
@@ -296,7 +297,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(height: 5),
                            buildSocialMediaAuth(
                             
-                            onTap: () async {
+                            onTap: () async { 
+                              removeUser(); 
                               ToRemoveAll(AppRoutes.rootGeneral);
                             },
                           ),
@@ -323,9 +325,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: heigth * 0.023),
                       Column(
                         children: [
+                           buildSocialMediaAuth(
+                            path: "assets/icons/google.svg",
+                            onTap: () async {
+                               context.read<AuthCubit>().signInGoogle();
+                            },
+                          ),
+                           SizedBox(height: 5),
                           buildSocialMediaAuth(
                             path: "assets/icons/apple.svg",
-                            onTap: () async {},
+                            onTap: () async {
+                               context.read<AuthCubit>().signInApple();
+                            },
                           ),
                            SizedBox(height: 5),
                            buildSocialMediaAuth(

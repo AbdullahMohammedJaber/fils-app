@@ -143,7 +143,7 @@ class _FormAddAuctionCoustomerState extends State<FormAddAuctionCoustomer> {
                           SizedBox(width: width, height: heigth * 0.01),
                           ValidateWidget(
                             validator: (value) {
-                              if (state.idCategory == null) {
+                              if (state.categoresId == null) {
                                 return StringApp.requiredField;
                               }
                               return null;
