@@ -7,6 +7,7 @@ import 'package:fils/managment/category/category_cubit.dart';
 import 'package:fils/managment/chat_bot/chat_bot_cubit.dart';
 import 'package:fils/managment/favorites/favorites_cubit.dart';
 import 'package:fils/managment/haraj/haraj_cubit.dart';
+import 'package:fils/managment/home/cubit/haraj_home_cubit.dart';
 import 'package:fils/managment/home/home_cubit.dart';
 import 'package:fils/managment/home/home_seller_cubit.dart';
 import 'package:fils/managment/language/language_cubit.dart';
@@ -52,6 +53,8 @@ List<BlocProvider> cubieList = [
   BlocProvider<ReelsCubit>(create: (_) => ReelsCubit()),
   BlocProvider<UpdateCubit>(create: (_) => UpdateCubit()),
   BlocProvider<OrderSellerCubit>(create: (_) => OrderSellerCubit()),
+  BlocProvider<HarajHomeCubit>(create: (_) => HarajHomeCubit()),
+
 
 
 

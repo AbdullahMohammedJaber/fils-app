@@ -13,7 +13,6 @@ import '../../../../../utils/theme/color_manager.dart';
 import '../../../../../utils/widget/defulat_text.dart';
 import '../../item_banner_details.dart';
  import '../gift_auction/gift_box_show.dart';
-import '../gift_auction/gift_section.dart';
 import 'auction_timer.dart';
 import 'bids_section.dart';
 
@@ -123,8 +122,8 @@ class _RoomAuctionScreenState extends State<RoomAuctionScreen> {
                           )
                           : const SizedBox(),
                       SizedBox(height: heigth * 0.03),
-                      GiftSection(id: state.detailsAuctionResponse!.data.id),
-                      SizedBox(height: heigth * 0.03),
+                    //  GiftSection(id: state.detailsAuctionResponse!.data.id),
+                     // SizedBox(height: heigth * 0.03),
                       ItemTimerLeftRoom(data: state.detailsAuctionResponse!.data),
                       SizedBox(height: heigth * 0.03),
                       Padding(

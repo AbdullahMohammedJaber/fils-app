@@ -3,12 +3,10 @@ import 'package:fils/managment/auction/auction_cubit.dart';
 import 'package:fils/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-
+ 
 import '../../../../../utils/const.dart';
 import '../../../../../utils/global_function/timer_format.dart';
-import '../../../../../utils/storage.dart';
-import '../../../../../utils/theme/color_manager.dart';
+ import '../../../../../utils/theme/color_manager.dart';
 import '../../../../../utils/widget/button_widget.dart';
 import '../../../../../utils/widget/custom_validation.dart';
 import '../../../../../utils/widget/defualt_text_form_faild.dart';
@@ -114,41 +112,7 @@ class _BidsSectionState extends State<BidsSection> {
                                   fontWeight: FontWeight.w500,
                                 ),
                                 const Spacer(),
-                                getUser()!.user!.type == "customer"
-                                    ? bid.bid.user.id != getUser()!.user!.id
-                                        ? GestureDetector(
-                                          child: Center(
-                                            child: SvgPicture.asset(
-                                              "assets/icons/gift.svg",
-                                            ),
-                                          ),
-                                          onTap: () async {
-                                            if (getBalance() > 0) {
-                                              showModalBottomSheet(
-                                                context: context,
-                                                isScrollControlled: true,
-
-                                                builder: (context) {
-                                                  return BottomSheetGift(
-                                                    id_resever:
-                                                        bid.bid.user.id
-                                                            .toString(),
-                                                    auction_id:
-                                                        bid.productId
-                                                            .toString(),
-                                                  );
-                                                },
-                                              );
-                                            } else {
-                                              showMessage(
-                                                "Please Charged Wallet".tr(),
-                                                value: false,
-                                              );
-                                            }
-                                          },
-                                        )
-                                        : const SizedBox()
-                                    : const SizedBox(),
+                               
                               ],
                             ),
                             const SizedBox(height: 15),

@@ -65,6 +65,7 @@ class _FormAddProductState extends State<FormAddProduct> {
                     faildFormProduct(
                       context,
                       controller: nameProduct,
+                      textInputType: TextInputType.name,
                       title: "Product Name",
                       pathIcon: "assets/icons/product_name.svg",
                       validator: (p0) {
@@ -78,7 +79,7 @@ class _FormAddProductState extends State<FormAddProduct> {
                       context,
                       controller: priceProduct,
                       textInputType: TextInputType.number,
-
+                      isDouble: true,
                       title: "Product price",
                       pathIcon: "assets/icons/product_price.svg",
                       validator: (p0) {
@@ -93,6 +94,7 @@ class _FormAddProductState extends State<FormAddProduct> {
                       context,
                       controller: discountProduct,
                       textInputType: TextInputType.number,
+                      isDouble: true,
                       title: "Discount %",
                       pathIcon: "assets/icons/product_price.svg",
                       validator: (p0) {
@@ -271,7 +273,7 @@ class _FormAddProductState extends State<FormAddProduct> {
                       ],
                     ),
                     SizedBox(height: heigth * 0.02),
-                      Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DefaultText(

@@ -74,6 +74,8 @@ class _FormAddAuctionSellerState extends State<FormAddAuctionSeller> {
                     faildFormProduct(
                       context,
                       controller: auctionPrice,
+                      textInputType: TextInputType.number,
+                      isDouble: true,
                       title: "Initial price",
                       pathIcon: "assets/icons/product_price.svg",
                       validator: (p0) {
@@ -86,6 +88,8 @@ class _FormAddAuctionSellerState extends State<FormAddAuctionSeller> {
                     faildFormProduct(
                       context,
                       controller: auctionFee,
+                      textInputType: TextInputType.number,
+                      isDouble: true,
                       title: "Assurance Fee",
                       pathIcon: "assets/icons/product_price.svg",
                     ),
@@ -177,7 +181,8 @@ class _FormAddAuctionSellerState extends State<FormAddAuctionSeller> {
                         ],
                       ),
                     SizedBox(height: heigth * 0.02),
-                  /*  Row(
+
+                    /*  Row(
                       children: [
                         Row(
                           children: [
@@ -211,7 +216,6 @@ class _FormAddAuctionSellerState extends State<FormAddAuctionSeller> {
                       ],
                     ),
                     SizedBox(height: heigth * 0.02),*/
-
                     Row(
                       children: [
                         Expanded(
