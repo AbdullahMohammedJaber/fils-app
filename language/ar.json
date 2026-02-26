@@ -86,7 +86,7 @@
   "Open Market": "المستعمل",
   "Please Select your Shop": "يرجى اختيار متجرك",
   "Shops": "المتاجر",
-  "This section is for licensed owners. If you do not have a license for your store, you can skip this section and complete the registration.":"هذا القسم مخصص لأصحاب المتاجر المرخّصين. إذا لم يكن لديك ترخيص لمتجرك، يمكنك تخطي هذا القسم وإكمال عملية التسجيل.",
+  "This section is for licensed owners. If you do not have a license for your store, you can skip this section and complete the registration.": "هذا القسم مخصص لأصحاب المتاجر المرخّصين. إذا لم يكن لديك ترخيص لمتجرك، يمكنك تخطي هذا القسم وإكمال عملية التسجيل.",
   "Theme": "المظهر",
   "Delete Account": "حذف الحساب",
   "Do you want to delete account ?": "هل انت متأكد من حذف الحساب ؟",
@@ -203,10 +203,9 @@
   "Start Time": "بداية الوقت",
   "End Time": "نهاية الوقت",
   "It begins after": "يبدأ بعد",
-  "Login as guest":"الدخول ك زائر",
-
-  "Login with apple account":"تسجيل الدخول باستخدام حساب آبل",
-"Login with google account":"تسجيل الدخول باستخدام حساب جوجل",
+  "Login as guest": "الدخول ك زائر",
+  "Login with apple account": "تسجيل الدخول باستخدام حساب آبل",
+  "Login with google account": "تسجيل الدخول باستخدام حساب جوجل",
   "description": "الوصف",
   "Sections": "الأقسام",
   "(license)": "(مرخص)",
@@ -225,9 +224,8 @@
   "Product price": "سعر المنتج",
   "Options": "الخيارات",
   "Variants": "المتغيرات",
-  "We've added new improvements for a better experience ✨\nPlease update the app.":"أضفنا تحسينات جديدة لتجربة أفضل ✨\nنرجو تحديث التطبيق.",
-  "Switch to customer account":"التحويل الى حساب المشتري",
-
+  "We've added new improvements for a better experience ✨\nPlease update the app.": "أضفنا تحسينات جديدة لتجربة أفضل ✨\nنرجو تحديث التطبيق.",
+  "Switch to customer account": "التحويل الى حساب المشتري",
   "Product Quantity": "كمية المنتج",
   "The entry must be a number only.": "يجب ان يكون المدخل رقم فقط",
   "Upload Product video": "رفع فيديو المنتج",
@@ -237,8 +235,7 @@
   "My Product": "منتجاتي",
   "There Are No Products Yet, ": "لا يوجد منتجات لحتى الان, ",
   "Auction Name": "اسم المزاد",
-  "Enter in Live":"ادخل الى البث المباشر",
-
+  "Enter in Live": "ادخل الى البث المباشر",
   "Coming Auction": "بيع تفاعلي آت",
   "Cannot enter the auction": "لا يمكن الدخول للبيع التفاعلي",
   "Product request": "اطلب المنتج",
@@ -407,9 +404,8 @@
   "Category": "التصنيفات",
   "Public auctions": "المزاد",
   "Reels": "الريلز",
-  "Sub Category" : "التصنيف الفرعي",
-  "Done Upload License":"تم رفع ملف الترخيص",
-
+  "Sub Category": "التصنيف الفرعي",
+  "Done Upload License": "تم رفع ملف الترخيص",
   "New Product": "المنتجات الجديدة",
   "See All": "عرض الكل",
   "Authentication": "نظام المصادقة",
@@ -548,9 +544,13 @@
   "This subscription has several features": "يحتوي هذا الاشتراك على عدة ميزات",
   "Our data has been accepted into the platform, you can now choose the subscription you want": "تم قبول بياناتنا في المنصة، يمكنك الآن اختيار الاشتراك الذي تريده",
   "Select option": "اختر المقاسات",
+ 
+  
+  
+  "Welcome to fils": "مرحبا بك في فلس",
+  "Join thousands of competitors around the Dreamer and start your auction now": "انضم لآلاف المتنافسين حول الحالم و إبدأ مزادك الآن",
+  "Follow-up using phone number":"المتابعة بإستخدام رقم الهاتف",
+  
+  
   "": ""
 }
-
-
-
-

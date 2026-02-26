@@ -23,7 +23,7 @@ class SplashRequest {
           ToRemoveAll(AppRoutes.rootGeneral);
            
           }else{
-            ToRemoveAll(AppRoutes.login);
+            ToRemoveAll(AppRoutes.landingPage);
           }
         }
       

@@ -57,7 +57,7 @@ class TabBarAuctionTimeDateFilter extends StatelessWidget {
                       height: 45,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        color: purpleColor.withOpacity(0.3),
+                        color: primaryDarkColor.withOpacity(0.3),
                         border: Border.all(color: Colors.transparent),
                       ),
                       child: Row(
@@ -106,7 +106,7 @@ class TabBarAuctionTimeDateFilter extends StatelessWidget {
                       height: 45,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        color: purpleColor.withOpacity(0.3),
+                        color: primaryDarkColor.withOpacity(0.3),
                         border: Border.all(color: Colors.transparent),
                       ),
                       child: Row(

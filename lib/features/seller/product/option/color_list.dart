@@ -98,7 +98,7 @@ class _ColorListState extends State<ColorList> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: purpleColor,
+                                    color: primaryDarkColor,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   padding: const EdgeInsets.all(10),
@@ -180,7 +180,7 @@ class _ColorListState extends State<ColorList> {
                                             width: 30,
                                             decoration: BoxDecoration(
                                               border: Border.all(
-                                                color: purpleColor,
+                                                color: primaryDarkColor,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(5),
@@ -190,7 +190,7 @@ class _ColorListState extends State<ColorList> {
                                                     ? Center(
                                                       child: SvgPicture.asset(
                                                         "assets/icons/check.svg",
-                                                        color: purpleColor,
+                                                        color: primaryDarkColor,
                                                       ),
                                                     )
                                                     : const SizedBox(),
@@ -224,7 +224,7 @@ class _ColorListState extends State<ColorList> {
                               : null,
                       child: FloatingActionButton(
                         onPressed: () => scrollUp(),
-                        backgroundColor: purpleColor,
+                        backgroundColor: primaryDarkColor,
                         mini: true,
                         child: const Icon(
                           Icons.arrow_downward,
@@ -244,7 +244,7 @@ class _ColorListState extends State<ColorList> {
                               : null,
                       child: FloatingActionButton(
                         onPressed: () => scrollDown(),
-                        backgroundColor: purpleColor,
+                        backgroundColor: primaryDarkColor,
                         mini: true,
                         child: const Icon(
                           Icons.arrow_upward,

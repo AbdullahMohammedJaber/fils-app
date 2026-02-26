@@ -84,7 +84,7 @@ class LanguageScreen extends StatelessWidget {
                                           ? Container(
                                             margin: const EdgeInsets.all(5),
                                             decoration: BoxDecoration(
-                                              color: purpleColor,
+                                              color: primaryDarkColor,
                                               borderRadius:
                                                   BorderRadius.circular(50),
                                             ),

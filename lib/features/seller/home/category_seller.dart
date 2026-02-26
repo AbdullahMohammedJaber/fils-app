@@ -33,7 +33,7 @@ class _CategorySectionSellerState extends State<CategorySectionSeller> {
     ),
     CustomButton(
       label: 'Subscriptions'.tr(),
-      color: purpleColor.withOpacity(0.2),
+      color: primaryDarkColor.withOpacity(0.2),
       path: "assets/icons/subscription.svg",
       dec:
           "As a seller, you must subscribe to a package to enjoy the app's features, such as adding products and auctions. Choose the package according to your specific needs."

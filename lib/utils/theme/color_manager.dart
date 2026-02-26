@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 
-Color primaryColor = const Color(0xff095FC2);
+ 
 Color primaryDarkColor = const Color(0xff042874);
 Color secondColor = const Color(0xff6132CB);
-Color purpleColor = const Color(0xffBA27B7);
+Color primaryColor = const Color(0xffAF2EB8);
 Color blackColor = const Color(0xff433E3F);
 Color textColor = const Color(0xff898384);
 Color greyLight = const Color(0xffD9D9D9);

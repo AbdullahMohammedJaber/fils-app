@@ -30,14 +30,14 @@ class TabBarItemFilter extends StatelessWidget {
                     borderRadius: BorderRadius.circular(18),
                     color:
                         state.typeSection == 2
-                            ? purpleColor
+                            ? primaryDarkColor
                             : getTheme()
                             ? Colors.black
                             : white,
                     border: Border.all(
                       color:
                           state.typeSection == 2
-                              ? purpleColor
+                              ? primaryDarkColor
                               : getTheme()
                               ? Colors.white
                               : textColor,
@@ -71,14 +71,14 @@ class TabBarItemFilter extends StatelessWidget {
                     borderRadius: BorderRadius.circular(18),
                     color:
                         state.typeSection == 1
-                            ? purpleColor
+                            ? primaryDarkColor
                             : getTheme()
                             ? Colors.black
                             : white,
                     border: Border.all(
                       color:
                           state.typeSection == 1
-                              ? purpleColor
+                              ? primaryDarkColor
                               : getTheme()
                               ? Colors.white
                               : textColor,

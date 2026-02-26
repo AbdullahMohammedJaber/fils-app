@@ -40,7 +40,7 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
               min: 1,
               max: 1000,
               divisions: 50,
-              activeColor: purpleColor,
+              activeColor: primaryDarkColor,
               inactiveColor: Colors.black,
               onChanged: (RangeValues price) {
                 controller.changeRangePrice(price);

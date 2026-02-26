@@ -1,5 +1,6 @@
  
 class AppRoutes {
+  static const landingPage = '/landingPageScreen';
   static const String splash = '/';
   static const String login = '/login';
   static const String virefyCodeSignup = '/virefyCodeSignup';
@@ -61,7 +62,7 @@ class AppRoutes {
   static const String settingWallet = '/settingWallet';
   static const String bankSetting = '/bankSetting';
   static const withdrowScreen = '/withdrowScreen';
-  
+  static const selectTypeLoginScreen = '/selectTypeLoginScreen';
 
 
 

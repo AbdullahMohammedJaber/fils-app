@@ -12,7 +12,7 @@ class LoadingUi extends StatelessWidget {
       child: LoadingAnimationWidget.discreteCircle(
         color: primaryColor,
         secondRingColor: orangeH,
-        thirdRingColor:purpleColor ,
+        thirdRingColor: primaryDarkColor ,
         size: 30,
       ),
     );

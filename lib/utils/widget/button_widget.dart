@@ -7,7 +7,7 @@ class ButtonWidget extends StatefulWidget {
   final dynamic title;
   final Color? colorTitle;
   final double? sizeTitle;
-  final dynamic fontType;
+  final FontType fontType;
   final Color? colorButton;
   final double? heightButton;
   final Function()? onTap;
@@ -21,7 +21,7 @@ class ButtonWidget extends StatefulWidget {
     this.radius = 14,
     this.heightButton = 55,
     this.onTap,
-    this.fontType = FontType.regular,
+    this.fontType = FontType.SemiBold,
     this.colorButton,
   });
 
@@ -50,7 +50,8 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   : DefaultText(
                     widget.title!,
                     fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                    type: widget.fontType,
+                     
                     color: widget.colorTitle!,
                   ),
         ),

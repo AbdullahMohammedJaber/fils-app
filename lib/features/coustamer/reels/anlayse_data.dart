@@ -151,7 +151,7 @@ Widget positionTitle(Reels data, BuildContext context, dynamic index) {
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: purpleColor,
+                      color: primaryDarkColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: DefaultText(

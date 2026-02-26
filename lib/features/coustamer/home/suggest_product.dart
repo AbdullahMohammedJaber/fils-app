@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_final_fields
+
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/managment/home/cubit/haraj_home_cubit.dart';
@@ -23,12 +27,47 @@ class SuggestProduct extends StatefulWidget {
 }
 
 class _SuggestProductState extends State<SuggestProduct> {
+ final ScrollController _controller = ScrollController();
+  late final Timer _timer;
+
+  bool _isUserScrolling = false;
+  final double _scrollStep = 150;
+
   @override
   void initState() {
+      context.read<HarajHomeCubit>().getAllHaraj(refresh: true);
     super.initState();
-    context.read<HarajHomeCubit>().getAllHaraj(refresh: true);
-
+    _startAutoScroll();
   }
+
+  void _startAutoScroll() {
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
+      if (!_controller.hasClients) return;
+      if (_isUserScrolling) return;
+
+      final maxScroll = _controller.position.maxScrollExtent;
+      final current = _controller.offset;
+
+      if (current + _scrollStep <= maxScroll) {
+        _controller.animateTo(
+          current + _scrollStep,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeInOut,
+        );
+      } else {
+ 
+        _timer.cancel();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -73,19 +112,16 @@ class _SuggestProductState extends State<SuggestProduct> {
                   height: heigth * 0.45,
                   child: const Center(child: LoadingUi()),
                 );
-              }
-
-            else  if (state.error != null) {
+              } else if (state.error != null) {
                 return NeonNoInternetView(
                   onRetry: () {
                     context.read<HarajHomeCubit>().getAllHaraj(refresh: true);
                   },
                   error: state.error!,
                 );
-              }
-           else {
+              } else {
                 final haraj = state.products;
-                if ( haraj.isEmpty) {
+                if (haraj.isEmpty) {
                   return EmptyDataScreen();
                 }
                 return SizedBox(
@@ -100,6 +136,7 @@ class _SuggestProductState extends State<SuggestProduct> {
                       return false;
                     },
                     child: ListView.builder(
+                      controller: _controller,
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount:

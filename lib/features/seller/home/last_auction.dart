@@ -52,7 +52,8 @@ class LastAuctionSeller extends StatelessWidget {
                         const SizedBox(width: 2),
                         GestureDetector(
                           onTap: () async {
-                            if (getPackageInfo() == null) {
+                            
+                            if (getPackageInfo()!.data == null) {
                            
                               context.read<ShopsCubit>().getAllShops();
                             

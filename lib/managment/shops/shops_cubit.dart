@@ -124,7 +124,7 @@ class ShopsCubit extends Cubit<ShopsState> {
   }
 
   void whenCreateStore() {
-    if (getPackageInfo() == null) {
+    if (getPackageInfo()!.data == null) {
       showMessage(
         "You must subscribe to a package to be able to add products and enjoy the services."
             .tr(),

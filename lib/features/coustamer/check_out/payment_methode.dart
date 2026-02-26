@@ -101,7 +101,7 @@ class _PaymentMethodeState extends State<PaymentMethode> {
                                             .data[index]
                                             .paymentTypeKey ==
                                         state.paymentMethode?.paymentTypeKey
-                                        ? purpleColor
+                                        ? primaryDarkColor
                                         : Colors.transparent,
                               ),
                               margin: const EdgeInsets.all(2),

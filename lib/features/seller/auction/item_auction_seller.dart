@@ -324,7 +324,7 @@ class _ItemAuctionSellerState extends State<ItemAuctionSeller> {
       case "started":
         return primaryColor;
       case "coming":
-        return purpleColor;
+        return primaryDarkColor;
       case "completed":
         return const Color(0xff32D732);
       case "cancelled":
@@ -339,7 +339,7 @@ class _ItemAuctionSellerState extends State<ItemAuctionSeller> {
       case "started":
         return primaryColor.withOpacity(0.3);
       case "coming":
-        return purpleColor.withOpacity(0.3);
+        return primaryDarkColor.withOpacity(0.3);
       case "completed":
         return const Color(0xff32D732).withOpacity(0.3);
       case "cancelled":

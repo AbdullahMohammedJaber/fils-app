@@ -40,10 +40,10 @@ class TabBarAuctionTypeFilter extends StatelessWidget {
                   height: 45,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),
-                    color: state.typeAuction == 1 ? purpleColor :getTheme() ? Colors.black : white,
+                    color: state.typeAuction == 1 ? primaryDarkColor :getTheme() ? Colors.black : white,
                     border: Border.all(
                       color:
-                      state.typeAuction == 1 ? purpleColor :getTheme() ? Colors.white : textColor,
+                      state.typeAuction == 1 ? primaryDarkColor :getTheme() ? Colors.white : textColor,
                     ),
                   ),
                   child: Center(
@@ -67,10 +67,10 @@ class TabBarAuctionTypeFilter extends StatelessWidget {
                   height: 45,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),
-                    color: state.typeAuction == 2 ? purpleColor :getTheme() ? Colors.black : white,
+                    color: state.typeAuction == 2 ? primaryDarkColor :getTheme() ? Colors.black : white,
                     border: Border.all(
                       color:
-                      state.typeAuction == 2 ? purpleColor :getTheme() ? Colors.white : textColor,
+                      state.typeAuction == 2 ? primaryDarkColor :getTheme() ? Colors.white : textColor,
                     ),
                   ),
                   child: Center(

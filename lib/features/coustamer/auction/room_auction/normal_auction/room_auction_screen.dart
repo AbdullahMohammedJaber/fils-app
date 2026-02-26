@@ -130,7 +130,7 @@ class _RoomAuctionScreenState extends State<RoomAuctionScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: DefaultText(
                           "Participants".tr(),
-                          color: purpleColor,
+                          color: primaryDarkColor,
                           fontSize: 18,
                           textAlign: TextAlign.start,
                           fontWeight: FontWeight.w600,

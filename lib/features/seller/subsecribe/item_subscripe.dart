@@ -149,7 +149,7 @@ class _ItemSubscribeState extends State<ItemSubscribe> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
                                         // ignore: deprecated_member_use
-                                        color: purpleColor.withOpacity(0.5),
+                                        color: primaryDarkColor.withOpacity(0.5),
                                       ),
                                       child: Center(
                                         child: SvgPicture.asset(

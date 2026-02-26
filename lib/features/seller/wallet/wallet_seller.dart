@@ -68,7 +68,7 @@ class _WalletSellerState extends State<WalletSeller> {
                   height: heigth * 0.12,
                   width: width,
                   decoration: BoxDecoration(
-                    color: purpleColor,
+                    color: primaryDarkColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -133,7 +133,7 @@ class _WalletSellerState extends State<WalletSeller> {
                           },
                           child: DefaultText(
                             "View Full Transactions".tr(),
-                            color: purpleColor,
+                            color: primaryDarkColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),

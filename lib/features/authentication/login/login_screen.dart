@@ -1,15 +1,12 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/core/data/request/auth/login.dart';
 import 'package:fils/managment/app_manage/app_cubit.dart';
 import 'package:fils/managment/auth_manage/auth_cubit.dart';
 import 'package:fils/managment/auth_manage/auth_state.dart';
 import 'package:fils/route/app_routes.dart';
-import 'package:fils/utils/storage.dart';
 
 import 'package:fils/utils/string.dart';
-import 'package:flutter/gestures.dart';
+import 'package:fils/utils/widget/item_back.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,12 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
-                    SizedBox(width: width, height: heigth * 0.05),
-                    DefaultText(
-                      "SIGN IN".tr(),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20,
-                    ),
+                    SizedBox(width: width, height: heigth * 0.02),
+                    ItemBack(title: "SIGN IN".tr()),
                     SizedBox(width: width, height: heigth * 0.07),
 
                     Column(
@@ -164,76 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: heigth * 0.02),
 
-                      Row(
-                      children: [
-                        Checkbox(
-                          value: controller.state.check,
-                          onChanged: (value) {
-                            controller.changeCheck(value!);
-                          },
-                        ),
-                        Expanded(
-                          child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: blackColor,
-                                fontFamily: 'Almarai',
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "I agree to".tr(),
-
-                                  style: TextStyle(
-                                    color: blackColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ' '.tr(),
-                                  style: TextStyle(
-                                    color: secondColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'privacy policy'.tr(),
-                                  style: TextStyle(
-                                    color: secondColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                  recognizer:
-                                      TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.pushNamed(
-                                            context,
-                                            AppRoutes.privacyPolicy,
-                                          );
-                                        },
-                                ),
-                                TextSpan(
-                                  text: ' '.tr(),
-                                  style: TextStyle(
-                                    color: secondColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'and terms of use'.tr(),
-                                  style: TextStyle(
-                                    color: blackColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: heigth * 0.05),
                     ButtonWidget(
-                      colorButton: secondColor,
                       title:
                           controller.state.loadingLogin
                               ? controller.state.loadingLogin
@@ -244,112 +168,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () async {
                         if (!formKey.currentState!.validate()) {
                         } else {
-                          if (controller.state.check) {
-                            LoginRequest login = LoginRequest(
-                              mobile:
-                                  "${controller.state.country!.phoneCode}${phoneController.text}",
-                              password: passwordController.text,
-                              userType: controller.userType,
-                            );
+                          LoginRequest login = LoginRequest(
+                            mobile:
+                                "${controller.state.country!.phoneCode}${phoneController.text}",
+                            password: passwordController.text,
+                            userType: controller.userType,
+                          );
 
-                            controller.loginFunction(
-                              loginRequest: login,
-                              context: context,
-                            );
-                          } else {
-                            showMessage(
-                              StringApp.messageCheckPrivacy.tr(),
-                              value: false,
-                            );
-                          }
+                          controller.loginFunction(
+                            loginRequest: login,
+                            context: context,
+                          );
                         }
                       },
                     ),
                     SizedBox(height: heigth * 0.02),
-
-                  
-                    if (Platform.isAndroid) ...[
-                      SizedBox(height: heigth * 0.03),
-                      Row(
-                        children: [
-                          Expanded(child: Container(height: 1, color: grey2)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: DefaultText(
-                              "OR".tr(),
-                              color: grey2,
-                              type: FontType.medium,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Expanded(child: Container(height: 1, color: grey2)),
-                        ],
-                      ),
-                      SizedBox(height: heigth * 0.023),
-                      Column(
-                        children: [
-                          buildSocialMediaAuth(
-                            path: "assets/icons/google.svg",
-                            onTap: () async {
-                              context.read<AuthCubit>().signInGoogle();
-                            },
-                          ),
-                            SizedBox(height: 5),
-                           buildSocialMediaAuth(
-                            
-                            onTap: () async { 
-                              removeUser(); 
-                              ToRemoveAll(AppRoutes.rootGeneral);
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                    if (Platform.isIOS) ...[
-                      SizedBox(height: heigth * 0.03),
-                      Row(
-                        children: [
-                          Expanded(child: Container(height: 1, color: grey2)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: DefaultText(
-                              "OR".tr(),
-                              color: grey2,
-                              type: FontType.medium,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Expanded(child: Container(height: 1, color: grey2)),
-                        ],
-                      ),
-                      SizedBox(height: heigth * 0.023),
-                      Column(
-                        children: [
-                           buildSocialMediaAuth(
-                            path: "assets/icons/google.svg",
-                            onTap: () async {
-                               context.read<AuthCubit>().signInGoogle();
-                            },
-                          ),
-                           SizedBox(height: 5),
-                          buildSocialMediaAuth(
-                            path: "assets/icons/apple.svg",
-                            onTap: () async {
-                               context.read<AuthCubit>().signInApple();
-                            },
-                          ),
-                           SizedBox(height: 5),
-                           buildSocialMediaAuth(
-                            
-                            onTap: () async {
-                              ToRemoveAll(AppRoutes.rootGeneral);
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                    
-                    SizedBox(height: heigth * 0.05),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

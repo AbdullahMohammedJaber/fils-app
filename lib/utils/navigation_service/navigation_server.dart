@@ -2,6 +2,7 @@ import 'package:fils/core/data/response/auction/auction_seller_response.dart';
 import 'package:fils/features/authentication/froget_password/create_new_password.dart';
 import 'package:fils/features/authentication/froget_password/forget_password.dart';
 import 'package:fils/features/authentication/froget_password/verification_code_forget_password.dart';
+import 'package:fils/features/authentication/init/select_type_login.dart';
 import 'package:fils/features/authentication/login/login_screen.dart';
 
 import 'package:fils/features/coustamer/auction/details_auction.dart';
@@ -40,6 +41,7 @@ import 'package:fils/features/seller/shops/form_shop.dart';
 import 'package:fils/features/seller/wallet/bank_setting.dart';
 import 'package:fils/features/seller/wallet/settings_wallet.dart';
 import 'package:fils/features/seller/wallet/wallet_seller.dart';
+import 'package:fils/features/splash_screen/landing_page_screen.dart';
 import 'package:fils/features/splash_screen/splash_screen.dart';
 import 'package:fils/main.dart';
 import 'package:fils/features/seller/wallet/withdrow_screen.dart';
@@ -73,6 +75,8 @@ class NavigationService {
       return RoomAuctionSellerScreen(detailsAuctionResponse: details);
       case AppRoutes.repordtScreen:
       return RepordtScreen();
+       case AppRoutes.landingPage:
+      return LandingPageScreen();
       case AppRoutes.splash:
         return const SplashScreen();
       case AppRoutes.withdrowScreen:
@@ -214,6 +218,8 @@ class NavigationService {
         return EditProductScreen(
           detailsProductSellerResponse: detailsProductSellerResponse,
         );
+      case AppRoutes.selectTypeLoginScreen:
+      return SelectTypeLoginScreen();  
       default:
         return const SplashScreen();
     }

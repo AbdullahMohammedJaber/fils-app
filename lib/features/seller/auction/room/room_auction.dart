@@ -154,7 +154,7 @@ class _RoomAuctionSellerScreenState extends State<RoomAuctionSellerScreen> {
                   children: [
                     DefaultText(
                       "Participants".tr(),
-                      color: purpleColor,
+                      color: primaryDarkColor,
                       fontSize: 18,
                       textAlign: TextAlign.start,
                       fontWeight: FontWeight.w600,

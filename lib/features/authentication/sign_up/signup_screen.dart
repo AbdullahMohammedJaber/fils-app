@@ -1,14 +1,12 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable
 
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/managment/app_manage/app_cubit.dart';
 import 'package:fils/managment/auth_manage/auth_cubit.dart';
 import 'package:fils/managment/auth_manage/auth_state.dart';
 import 'package:fils/utils/string.dart';
+import 'package:fils/utils/widget/item_back.dart';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +14,6 @@ import 'package:fils/utils/const.dart';
 import 'package:fils/utils/theme/color_manager.dart';
 import '../../../../utils/global_function/validation.dart';
 import '../../../core/data/request/auth/signup.dart';
-import '../../../route/app_routes.dart';
 import '../../../utils/widget/button_widget.dart';
 import '../../../utils/widget/custom_validation.dart';
 import '../../../utils/widget/defualt_text_form_faild.dart';
@@ -42,7 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-     WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<AppCubit>().hide();
     });
     return BlocConsumer<AuthCubit, AuthState>(
@@ -58,12 +55,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
-                    SizedBox(width: width, height: heigth * 0.05),
-                    DefaultText(
-                      "SIGN UP".tr(),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20,
-                    ),
+                    SizedBox(width: width, height: heigth * 0.02),
+                    ItemBack(title: "SIGN UP".tr()),
 
                     SizedBox(width: width, height: heigth * 0.05),
                     Column(
@@ -236,11 +229,11 @@ class _SignupScreenState extends State<SignupScreen> {
                             controller: confirmPassword,
                             isPreffix: true,
                             hintText: "Confirm Password".tr(),
-                             isShow: state.isShowPasswordSignup,
+                            isShow: state.isShowPasswordSignup,
                             pathIconPrefix: "assets/icons/lock.svg",
                             isIcon: true,
                             ontapIcon: () {
-                               controller.changeVisibalePassword(isLogin: false);
+                              controller.changeVisibalePassword(isLogin: false);
                             },
                             textInputType: TextInputType.visiblePassword,
                             pathIcon: "assets/icons/eye-slash.svg",
@@ -270,77 +263,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
                     SizedBox(height: heigth * 0.03),
-                     Row(
-                      children: [
-                        Checkbox(
-                          value: controller.state.check,
-                          onChanged: (value) {
-                            controller.changeCheck(value!);
-                          },
-                        ),
-                        Expanded(
-                          child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: blackColor,
-                                fontFamily: 'Almarai',
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "I agree to".tr(),
-
-                                  style: TextStyle(
-                                    color: blackColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ' '.tr(),
-                                  style: TextStyle(
-                                    color: secondColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'privacy policy'.tr(),
-                                  style: TextStyle(
-                                    color: secondColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                  recognizer:
-                                      TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.pushNamed(
-                                            context,
-                                            AppRoutes.privacyPolicy,
-                                          );
-                                        },
-                                ),
-                                TextSpan(
-                                  text: ' '.tr(),
-                                  style: TextStyle(
-                                    color: secondColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'and terms of use'.tr(),
-                                  style: TextStyle(
-                                    color: blackColor,
-                                    fontFamily: 'Almarai',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: heigth * 0.03),
 
                     ButtonWidget(
-                      colorButton: secondColor,
                       title:
                           controller.state.loadingSignup
                               ? controller.state.loadingSignup
@@ -351,87 +275,22 @@ class _SignupScreenState extends State<SignupScreen> {
                       onTap: () async {
                         if (!_key.currentState!.validate()) {
                         } else {
-                          if (controller.state.check) {
-                            SignupRequest signup = SignupRequest(
-                              mobile:
-                                  "${controller.state.country!.phoneCode}${phone.text}",
-                              password: password.text,
-                              name: name.text,
-                              confirmPassword: confirmPassword.text,
-                              email: email.text,
-                              userType: controller.userType,
-                            );
+                          SignupRequest signup = SignupRequest(
+                            mobile:
+                                "${controller.state.country!.phoneCode}${phone.text}",
+                            password: password.text,
+                            name: name.text,
+                            confirmPassword: confirmPassword.text,
+                            email: email.text,
+                            userType: controller.userType,
+                          );
 
-                            controller.signupFunction(context, signup);
-                          } else {
-                            showMessage(
-                              StringApp.messageCheckPrivacy.tr(),
-                              value: false,
-                            );
-                          }
+                          controller.signupFunction(context, signup);
                         }
                       },
                     ),
                     SizedBox(height: heigth * 0.02),
 
-                   
-                    if (Platform.isAndroid) ...[
-                      SizedBox(height: heigth * 0.03),
-                      Row(
-                        children: [
-                          Expanded(child: Container(height: 1, color: grey2)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: DefaultText(
-                              "OR".tr(),
-                              color: grey2,
-                              type: FontType.medium,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Expanded(child: Container(height: 1, color: grey2)),
-                        ],
-                      ),
-                      SizedBox(height: heigth * 0.023),
-                      Column(
-                        children: [
-                          buildSocialMediaAuth(
-                            path: "assets/icons/google.svg",
-                            onTap: () async {
-                              context.read<AuthCubit>().signInGoogle();
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                    if (Platform.isIOS) ...[
-                      SizedBox(height: heigth * 0.03),
-                      Row(
-                        children: [
-                          Expanded(child: Container(height: 1, color: grey2)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: DefaultText(
-                              "OR".tr(),
-                              color: grey2,
-                              type: FontType.medium,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Expanded(child: Container(height: 1, color: grey2)),
-                        ],
-                      ),
-                      SizedBox(height: heigth * 0.023),
-                      Column(
-                        children: [
-                          buildSocialMediaAuth(
-                            path: "assets/icons/apple.svg",
-                            onTap: () async {},
-                          ),
-                        ],
-                      ),
-                    ],
-                    SizedBox(height: heigth * 0.05),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
  import 'package:fils/language_list.dart';
 import 'package:fils/main.dart';
@@ -14,6 +15,7 @@ import 'package:fils/utils/storage.dart';
 import 'package:fils/utils/theme/dark_theme.dart';
 import 'package:fils/utils/theme/theme_manager.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +37,12 @@ initApp() async {
         startLocale: const Locale('ar', ''),
          
         supportedLocales: [...localList],
-        child: MyApp(),
+        child: DevicePreview(
+          builder: (context) => MyApp(),
+          enabled: !kReleaseMode,
+
+
+          ),
       ),
      
   );

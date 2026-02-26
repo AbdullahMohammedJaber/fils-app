@@ -63,7 +63,7 @@ class _WithdrowScreenState extends State<WithdrowScreen> {
                     Expanded(
                       child: DottedLine(
                         dashLength: 5,
-                        dashColor: state.stepTow ? purpleColor : textColor,
+                        dashColor: state.stepTow ? primaryDarkColor : textColor,
                       ),
                     ),
                     // Second step (Inactive)
@@ -117,7 +117,7 @@ class _WithdrowScreenState extends State<WithdrowScreen> {
                                 margin: const EdgeInsets.all(1.2),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: purpleColor,
+                                  color: primaryDarkColor,
                                 ),
                               ),
                             ),
@@ -129,7 +129,7 @@ class _WithdrowScreenState extends State<WithdrowScreen> {
                       height: heigth * 0.12,
                       width: width,
                       decoration: BoxDecoration(
-                        color: purpleColor,
+                        color: primaryDarkColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
