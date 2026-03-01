@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-await AppLinkHandler.init();
+  await AppLinkHandler.init();
   await initApp();
 }
 

@@ -1,6 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fils/route/app_routes.dart';
+import 'package:fils/route/control_route.dart';
 import 'package:flutter/material.dart';
 
 
@@ -83,7 +85,7 @@ class _ScaleTransitionDialogState extends State<ScaleTransitionDialog>
               title: "Login".tr(),
               onTap: () {
                 Navigator.pop(context);
-              //  ToWithFade(context, const LoginScreen());
+                ToWithFade( AppRoutes.login );
               },
             ),
           ),

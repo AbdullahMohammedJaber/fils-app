@@ -1,9 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fils/features/coustamer/haraj/widget_haraj.dart';
 import 'package:fils/managment/auction/auction_cubit.dart';
+import 'package:fils/route/app_routes.dart';
+import 'package:fils/route/control_route.dart';
 
 import 'package:fils/utils/enum_class.dart';
 import 'package:fils/utils/setting_ui/loading_ui.dart';
 import 'package:fils/utils/setting_ui/no_data.dart';
+import 'package:fils/utils/storage.dart';
+import 'package:fils/utils/widget/dialog_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,7 +66,22 @@ class _AuctionRootState extends State<AuctionRoot> {
                   canBack: true,
                 ),
               ),
-
+ FloatingAddProductWidget(
+                onTap: () {
+                  if (isLogin()) {
+                    if(getUser()!.user!.phone!.isEmpty){
+                      showMessage("Enter your mobile number".tr(), value: false);
+                    ToWithFade(AppRoutes.editPersonalInformationScreen);
+                       
+                    }else{
+                    ToWithFade(AppRoutes.formAddAuctionCoustomer);
+      
+                    }
+                  } else {
+                    showDialogAuth(context);
+                  }
+                },
+              ),
               SizedBox(width: width * 0.02),
             ],
           ),

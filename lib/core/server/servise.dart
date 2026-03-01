@@ -53,7 +53,7 @@ class ApiService {
   static String resendCode = "auth/resend_code";
   static String placeBid = "auction/place-bid?is_auction=1";
   static String socialLogin = "auth/social-login";
-  static String addAuctionForm = "auction/products/store";
+  static String addAuctionForm = "auction/customer/store";
 
   
 }

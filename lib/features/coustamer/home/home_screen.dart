@@ -1,6 +1,5 @@
 import 'package:fils/core/data/response/home/home_response.dart';
 import 'package:fils/features/coustamer/home/app_bar_home.dart';
-import 'package:fils/features/coustamer/home/banner_ads.dart';
 import 'package:fils/features/coustamer/home/category_section.dart';
 import 'package:fils/features/coustamer/home/last_auction.dart';
 import 'package:fils/features/coustamer/home/new_product.dart';
@@ -34,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: heigth * 0.03),
                 ItemSearch(),
                 SizedBox(height: heigth * 0.03),
-                BannerAdsScreen(),
-                SizedBox(height: heigth * 0.03),
+               // BannerAdsScreen(),
+               // SizedBox(height: heigth * 0.03),
                 ItemCategoryHome(),
                 SizedBox(height: heigth * 0.01),
                 if (homeResponse.data!.latestAuction != null)
