@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     SizedBox(width: width, height: heigth * 0.02),
-                    ItemBack(title: "SIGN IN".tr()),
+                    ItemBack(title: "SIGN IN".tr() , isBack: false,),
                     SizedBox(width: width, height: heigth * 0.07),
 
                     Column(

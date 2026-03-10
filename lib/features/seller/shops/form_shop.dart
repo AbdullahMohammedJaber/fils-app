@@ -107,7 +107,7 @@ class _FormShopState extends State<FormShop> {
                         Row(
                           children: [
                             DefaultText(
-                              "Upload Product image".tr(),
+                              "Upload logo shop".tr(),
                               color: blackColor,
                               fontWeight: FontWeight.w600,
                               fontSize: 14,

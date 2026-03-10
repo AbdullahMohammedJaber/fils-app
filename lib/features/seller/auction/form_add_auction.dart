@@ -378,6 +378,50 @@ class _FormAddAuctionSellerState extends State<FormAddAuctionSeller> {
                         ),
                       ],
                     ),
+                      SizedBox(height: heigth * 0.02),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            DefaultText(
+                              "Upload many Product image (optional)".tr(),
+                              color: blackColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                            DefaultText(
+                              " * ".tr(),
+                              color: error40,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: width, height: heigth * 0.02),
+                        AnimatedMultiImagePickerFormField(
+                          images: state.imageProducts,
+                          // urlImages: _urlImages,
+                          isLoading: state.loadingUploadImages,
+                          onPickImages: () {
+                            controller.functionSelectMultiImage(context);
+                          },
+                          onRemoveImage: (index) {
+                            state.deleteImageAtIndex(index: index);
+                            setState(() {});
+                          },
+                          validator: (files) {
+                            return null;
+                          },
+                          height: 120,
+                          width: 120,
+                          label: "Upload many Product image (optional)".tr(),
+                          maxImages: 5,
+                          spacing: 12,
+                        ),
+                      ],
+                    ),
                     SizedBox(height: heigth * 0.02),
 
                     faildFormProduct(

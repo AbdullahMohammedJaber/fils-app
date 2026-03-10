@@ -164,10 +164,22 @@ class AuctionCubit extends Cubit<AuctionState> {
 
   changeListenerToPriceBid() {
     totalPriceBid = 0.0;
-    for (var element in state.bids) {
-      totalPriceBid += extractDouble(element.bid.amount);
+    List<double> bidAmounts = [];
+    if(state.bids.isNotEmpty){
+      for (var element in state.bids) {
+        bidAmounts.add(extractDouble(element.bid.amount));
+      }
+      totalPriceBid = bidAmounts[0];
+
+      for (int i = 0; i < bidAmounts.length; i++) {
+        if (bidAmounts[i] > totalPriceBid) {
+          totalPriceBid = bidAmounts[i];
+        }
+      }
     }
-    emit(state.copyWith(totalPriceBid: this.totalPriceBid));
+   
+
+    emit(state.copyWith(totalPriceBid: totalPriceBid));
   }
 
   void fetchBids(dynamic auctionId) {
@@ -436,10 +448,8 @@ class AuctionCubit extends Cubit<AuctionState> {
     final response = await dioClient.request(path: url, method: 'GET');
     closeAllLoading();
     if (response.statusCode == 200) {
-     
-        showMessage("Done".tr(), value: true);
-        state.detailsAuctionResponse!.data.isPaidAssuranceFee = true;
-   
+      showMessage("Done".tr(), value: true);
+      state.detailsAuctionResponse!.data.isPaidAssuranceFee = true;
     } else {
       showModalBottomSheet(
         context: NavigationService.navigatorKey.currentContext!,

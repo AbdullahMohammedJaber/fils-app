@@ -72,7 +72,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           if (scroll.metrics.pixels >=
                                   scroll.metrics.maxScrollExtent - 200 &&
                               state.hasMore) {
-                              
                             controller.getListFavorites();
                           }
                           return false;

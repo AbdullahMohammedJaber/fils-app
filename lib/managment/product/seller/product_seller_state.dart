@@ -7,11 +7,15 @@ class ProductSellerState {
   final bool loading;
   // Data Form
   final bool loadingUploadImage;
+  final bool loadingUploadImages;
   final int? idCategory;
   final String? nameCategory;
   final String? nameCategores;
   final File? imageProduct;
+  final List<File>  imageProducts;
+
   final String? idImage;
+  final List<String>? imageIds; 
   final List<int> categoryIds;
 
   // get All Product Seller State
@@ -37,6 +41,7 @@ class ProductSellerState {
     this.errorDetails,
     this.hintOption = "Add Options (Colors, size)",
     this.selectColor = false,
+    this.loadingUploadImages = false,
     this.selectSize = false,
     this.sizeList,
     this.colorList,
@@ -54,7 +59,9 @@ class ProductSellerState {
     this.idCategory,
     this.nameCategory,
     this.imageProduct,
+    this.imageProducts = const [],
     this.idImage,
+    this.imageIds,
     this.loadingUploadImage = false,
   });
 
@@ -73,6 +80,8 @@ class ProductSellerState {
     File? imageProduct,
     String? idImage,
     bool? loadingUploadImage,
+    bool? loadingUploadImages,
+
     List<int>? categoryIds,
     String? nameCategores,
     bool? selectColor,
@@ -81,6 +90,9 @@ class ProductSellerState {
     List<ColorProduct>? colorList,
     List<Value>? sizeSelect,
     List<ColorProduct>? colorSelect,
+    List<File>? imageProducts,
+    List<String>? imageIds,
+    
   }) {
     return ProductSellerState(
       loading: loading ?? this.loading,
@@ -107,6 +119,9 @@ class ProductSellerState {
       colorList: colorList ?? this.colorList,
       colorSelect: colorSelect ?? this.colorSelect,
       sizeSelect: sizeSelect ?? this.sizeSelect,
+      imageProducts: imageProducts ?? this.imageProducts,
+      imageIds: imageIds ?? this.imageIds,
+      loadingUploadImages: loadingUploadImages ?? this.loadingUploadImages,
     );
   }
 
@@ -121,8 +136,11 @@ class ProductSellerState {
       idCategory: null,
       nameCategory: null,
       imageProduct: null,
+      imageProducts: const [],
       idImage: null,
+      imageIds: null,
       loadingUploadImage: false,
+      loadingUploadImages: false,
       categoryIds: [],
       nameCategores: null,
       selectSize: false,
@@ -145,12 +163,21 @@ class ProductSellerState {
       imageProduct: null,
       idImage: null,
       loadingUploadImage: false,
+      loadingUploadImages: false,
       categoryIds: categoryIds ?? [],
       nameCategores: nameCategores,
       idCategory: idCategory,
       nameCategory: nameCategory,
-      colorSelect: colorSelect!,
-      sizeSelect:  sizeLSelect!,
+      colorSelect: colorSelect ?? [],
+      sizeSelect:  sizeLSelect ?? [],
+      imageProducts: const [],
+      imageIds: null,
     );
+  }
+
+ deleteImageAtIndex({required int index}) {
+
+    imageProducts.removeAt(index  ) ;
+    imageIds?.removeAt(index) ;
   }
 }

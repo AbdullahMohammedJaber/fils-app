@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 class ItemBack extends StatelessWidget {
   final String title;
-  const ItemBack({super.key, required this.title});
+  final bool isBack;
+  const ItemBack({super.key, required this.title , this.isBack = true});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,7 @@ class ItemBack extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Row(
         children: [
+          if(isBack)
           GestureDetector(
             onTap: (){
               Navigator.pop(context);

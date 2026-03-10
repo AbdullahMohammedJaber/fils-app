@@ -58,7 +58,50 @@ class AuctionSellerCubit extends Cubit<AuctionSellerState> {
     );
   }
 
-  
+    functionSelectMultiImage(BuildContext context) async {
+    try {
+      emit(
+        state.copyWith(
+          loadingUploadImages: true,
+
+          imageProducts: null,
+          imageIds: null,
+          categoresId: state.categoresId,
+        ),
+      );
+      final result = await pickAndUploadMultiImages(
+        context: context,
+        endpoint: "file/upload",
+        fileKey: "aiz_file",
+        seller: true,
+      );
+      if (result != null) {
+        emit(
+          state.copyWith(
+            loadingUploadImages: false,
+            imageProducts: result.map((e) => e.file).toList(),
+            imageIds: result.map((e) => e.imageId).toList(),
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            loadingUploadImages: false,
+            imageProducts: null,
+            imageIds: null,
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          loadingUploadImages: false,
+          imageProducts: null,
+          imageIds: null,
+        ),
+      );
+    }
+  }
   changeCategoryData({required int id, required String name}) {
     emit(state.copyWith(idCategory: id, nameCategory: name));
   }

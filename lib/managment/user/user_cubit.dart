@@ -48,6 +48,7 @@ class UserCubit extends Cubit<UserState> {
       context: context,
       endpoint: "file/upload",
       fileKey: "aiz_file",
+      seller: getUser()!.user!.type == "seller" ? true : false,
     );
     
     if (result != null) {

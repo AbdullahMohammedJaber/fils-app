@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/core/data/response/product/item_product.dart';
- import 'package:fils/managment/favorites/favorites_cubit.dart';
+import 'package:fils/managment/favorites/favorites_cubit.dart';
 import 'package:fils/route/app_routes.dart';
 import 'package:fils/route/control_route.dart';
 import 'package:fils/utils/global_function/number_format.dart';
@@ -16,7 +16,6 @@ import 'package:fils/utils/const.dart';
 
 import 'package:fils/utils/theme/color_manager.dart';
 
- 
 class ProductItemWidget extends StatefulWidget {
   final ProductListModel? productListModel;
   final bool isAuction;
@@ -27,7 +26,7 @@ class ProductItemWidget extends StatefulWidget {
     super.key,
     this.productListModel,
 
-  required  this.isAuction,
+    required this.isAuction,
   });
 
   @override
@@ -37,9 +36,6 @@ class ProductItemWidget extends StatefulWidget {
 class _ProductItemWidgetState extends State<ProductItemWidget> {
   @override
   Widget build(BuildContext context) {
-    if (widget.productListModel!.shop_name == null ) {
-      return SizedBox();
-    }
     return GestureDetector(
       onTap: () {
         ToWithFade(
@@ -123,22 +119,24 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: heigth * 0.011),
-                  Row(
-                    children: [
-                      SvgPicture.asset("assets/icons/store_nav.svg"),
-                      SizedBox(width: width * 0.01),
-                      Expanded(
-                        child: DefaultText(
-                          widget.productListModel!.shop_name,
-                          color: getTheme() ? white : textColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                  if (widget.productListModel!.shop_name != null)
+                    Row(
+                      children: [
+                        SvgPicture.asset("assets/icons/store_nav.svg"),
+                        SizedBox(width: width * 0.01),
+                        Expanded(
+                          child: DefaultText(
+                            widget.productListModel!.shop_name,
+                            color: getTheme() ? white : textColor,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                   SizedBox(height: heigth * 0.001),
-                  widget.productListModel!.current_stock == 0 && widget.productListModel!.current_stock!=null
+                  widget.productListModel!.current_stock == 0 &&
+                          widget.productListModel!.current_stock != null
                       ? Container(
                         width: width,
                         height: heigth * 0.05,
@@ -158,7 +156,6 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
                             fontWeight: FontWeight.w500,
                             fontSize: 14,
                           ),
-                          
                         ],
                       ),
                 ],
@@ -209,7 +206,9 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
                     child: Image.network(
                       widget.productListModel!.shop_logo,
                       fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Image.asset("assets/icons/fils.png"),
+                      errorBuilder:
+                          (context, error, stackTrace) =>
+                              Image.asset("assets/icons/fils.png"),
                     ),
                   ),
                 ),

@@ -128,14 +128,14 @@ class _RoomAuctionSellerScreenState extends State<RoomAuctionSellerScreen> {
                           ),
                           const SizedBox(width: 5),
                           DefaultText(
-                            app.bids.last.bid.user.name,
+                            app.bids.first.bid.user.name,
                             color: primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
                           const Spacer(),
                           DefaultText(
-                            "${app.bids.last.bid.amount} KWD",
+                            "${app.bids.first.bid.amount} KWD",
                             color: const Color(0xffFE1515),
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

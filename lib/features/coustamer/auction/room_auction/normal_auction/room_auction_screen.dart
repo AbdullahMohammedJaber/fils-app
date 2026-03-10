@@ -12,7 +12,7 @@ import '../../../../../utils/const.dart';
 import '../../../../../utils/theme/color_manager.dart';
 import '../../../../../utils/widget/defulat_text.dart';
 import '../../item_banner_details.dart';
- import '../gift_auction/gift_box_show.dart';
+import '../gift_auction/gift_box_show.dart';
 import 'auction_timer.dart';
 import 'bids_section.dart';
 
@@ -28,7 +28,6 @@ class _RoomAuctionScreenState extends State<RoomAuctionScreen> {
   final key = GlobalKey<FormState>();
   @override
   void initState() {
- 
     super.initState();
     context.read<AuctionCubit>().fetchBids(
       context.read<AuctionCubit>().state.detailsAuctionResponse!.data.id,
@@ -122,9 +121,11 @@ class _RoomAuctionScreenState extends State<RoomAuctionScreen> {
                           )
                           : const SizedBox(),
                       SizedBox(height: heigth * 0.03),
-                    //  GiftSection(id: state.detailsAuctionResponse!.data.id),
-                     // SizedBox(height: heigth * 0.03),
-                      ItemTimerLeftRoom(data: state.detailsAuctionResponse!.data),
+                      //  GiftSection(id: state.detailsAuctionResponse!.data.id),
+                      // SizedBox(height: heigth * 0.03),
+                      ItemTimerLeftRoom(
+                        data: state.detailsAuctionResponse!.data,
+                      ),
                       SizedBox(height: heigth * 0.03),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -139,54 +140,57 @@ class _RoomAuctionScreenState extends State<RoomAuctionScreen> {
                       SizedBox(height: heigth * 0.05),
                       BidsSection(id: state.detailsAuctionResponse!.data.id),
                       const SizedBox(height: 2),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border(top: BorderSide(color: textColor)),
-                        ),
-                        child: TextFormField(
-                          controller: bidController,
-                          keyboardType: TextInputType.number,
-                          validator: (value) {
-                            if (bidController.text.isEmpty || value!.isEmpty) {
-                              return StringApp.requiredField;
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Add bid ...".tr(),
-                            suffixIcon: IconButton(
-                              icon: Icon(Icons.send, color: primaryColor),
-                              onPressed: () async {
-                                if (key.currentState!.validate()) {
-                                  if (isLogin()) {
-                                    controller.validateBid(
-                                      bid: double.parse(bidController.text),
-                                    );
-                                    bidController.clear();
-                                  } else {
-                                    showDialogAuth(context);
-                                  }
-                                }
-                              },
-                            ),
+                      if (getUser()!.user!.id !=
+                          state.detailsAuctionResponse!.data.sellerId)
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border(top: BorderSide(color: textColor)),
                           ),
-                          textInputAction: TextInputAction.send,
-                          onFieldSubmitted: (value) async {
-                            if (key.currentState!.validate()) {
-                              if (isLogin()) {
-                                controller.validateBid(
-                                  bid: double.parse(bidController.text),
-                                );
-                                bidController.clear();
+                          child: TextFormField(
+                            controller: bidController,
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (bidController.text.isEmpty ||
+                                  value!.isEmpty) {
+                                return StringApp.requiredField;
                               } else {
-                                showDialogAuth(context);
+                                return null;
                               }
-                            }
-                          },
+                            },
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Add bid ...".tr(),
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.send, color: primaryColor),
+                                onPressed: () async {
+                                  if (key.currentState!.validate()) {
+                                    if (isLogin()) {
+                                      controller.validateBid(
+                                        bid: double.parse(bidController.text),
+                                      );
+                                      bidController.clear();
+                                    } else {
+                                      showDialogAuth(context);
+                                    }
+                                  }
+                                },
+                              ),
+                            ),
+                            textInputAction: TextInputAction.send,
+                            onFieldSubmitted: (value) async {
+                              if (key.currentState!.validate()) {
+                                if (isLogin()) {
+                                  controller.validateBid(
+                                    bid: double.parse(bidController.text),
+                                  );
+                                  bidController.clear();
+                                } else {
+                                  showDialogAuth(context);
+                                }
+                              }
+                            },
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),

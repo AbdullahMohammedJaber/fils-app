@@ -8,8 +8,8 @@ import 'package:share_plus/share_plus.dart';
 double width = 0.0;
 double heigth = 0.0;
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
-showMessage(  String message, {required bool value}) {
+    FlutterLocalNotificationsPlugin();
+showMessage(String message, {required bool value}) {
   if (value) {
     CherryToast.success(
       title: Text(message, style: TextStyle(color: blackColor)),
@@ -34,5 +34,13 @@ void shareProductLink(dynamic productId) {
   Share.share(
     "قم بزيارة منتجي :  $link",
     subject: "مشاركة رابط المنتج الخاص بك",
+  );
+}
+
+void shareAuctionLink(dynamic productId) {
+  final link = "https://dashboard.fils.app/auction/$productId";
+  Share.share(
+    "قم بزيارة مزادي :  $link",
+    subject: "مشاركة رابط المزاد الخاص بك",
   );
 }

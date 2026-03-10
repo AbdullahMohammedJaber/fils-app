@@ -28,8 +28,8 @@ class _PaymentWebViewAuctionState extends State<PaymentWebViewAuction> {
               onPageStarted: (url) async {
                 log("===========>>> onPageStarted  $url");
 
-                if (url.contains('https://dashboard.fils.app/api')) {
-                  String baseUrl = "https://dashboard.fils.app/api/v1/";
+                if (url.contains('https://dashboard.stage.app/api')) {
+                  String baseUrl = "https://dashboard.stage.app/api/v1/";
                   String remainingUrl = url.replaceFirst(baseUrl, "");
                    context.read<AuctionCubit>().functionWebView(
                     url: remainingUrl,

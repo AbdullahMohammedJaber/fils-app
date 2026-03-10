@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, empty_catches
 
 import 'dart:convert';
 import 'dart:developer';
@@ -28,28 +28,74 @@ class NotificationService {
   // Channel ID for Android
   final String _channelId = "fils";
 
-  Future<void> init() async {
-    // Initialize local notifications
-    await _initLocalNotifications();
+Future<void> init() async {
+  await _initLocalNotifications();
+ final FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings =
+      await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
 
-    // iOS: show alert, badge, sound even in foreground
-    await FirebaseMessaging.instance
+  if (settings.authorizationStatus != AuthorizationStatus.authorized) {
+    return;
+  }
+   await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+ await messaging.setAutoInitEnabled(true);
+ 
+  try {
+    if (Platform.isIOS) {
+ 
+      await Future.delayed(const Duration(seconds: 2));
 
-    // Get FCM token
-    String? token = await FirebaseMessaging.instance.getToken();
-    printGreen("FCM Token: $token");
-    setFcmToken(token!);
+      String? apnsToken =
+          await FirebaseMessaging.instance.getAPNSToken();
 
-    await FirebaseMessaging.instance.subscribeToTopic("fils");
+ 
+      if (apnsToken == null) {
+    
+        return;
+      }
+
+      
+      await setFcmToken(apnsToken); // خزنه في السيرفر أو SharedPrefs
+
+      String? fcmToken =
+          await FirebaseMessaging.instance.getToken();
+
+      if (fcmToken != null) {
+ 
+        await setFcmToken(fcmToken);
+      }
+    } else {
+      // Android
+      String? fcmToken =
+          await FirebaseMessaging.instance.getToken();
+
+      if (fcmToken != null) {
+     
+        await setFcmToken(fcmToken);
+        await FirebaseMessaging.instance.subscribeToTopic("fils");
+      }
+    }
+
+    // استماع لتحديث التوكن
+    FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
+   
+      await setFcmToken(newToken);
+    });
 
     _listenFCM();
+  } catch (e) {
+ 
   }
-
+}
   Future<void> _initLocalNotifications() async {
     var androidSettings = const AndroidInitializationSettings(
       '@drawable/logo_noti',

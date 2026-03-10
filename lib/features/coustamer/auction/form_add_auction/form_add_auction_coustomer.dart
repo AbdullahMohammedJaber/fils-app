@@ -84,6 +84,12 @@ class _FormAddAuctionCoustomerState extends State<FormAddAuctionCoustomer> {
                       isDouble: true,
                       textInputType: TextInputType.phone,
                       controller: auctionFee,
+                       validator: (p0) {
+                        if (auctionFee.text.isEmpty) {
+                          return StringApp.requiredField;
+                        }
+                        return null;
+                      },
                       title: "Assurance Fee",
                       pathIcon: "assets/icons/product_price.svg",
                     ),
@@ -135,7 +141,7 @@ class _FormAddAuctionCoustomerState extends State<FormAddAuctionCoustomer> {
                         children: [
                           SizedBox(height: heigth * 0.02),
                           DefaultText(
-                            "Category".tr(),
+                            "Sub Category".tr(),
                             color: blackColor,
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
@@ -150,7 +156,7 @@ class _FormAddAuctionCoustomerState extends State<FormAddAuctionCoustomer> {
                             },
                             child: TextFormFieldWidget(
                               isPreffix: true,
-                              hintText: state.nameCategores ?? "Category".tr(),
+                              hintText: state.nameCategores ?? "Sub Category".tr(),
                               pathIconPrefix: "assets/icons/add_cir.svg",
                               isIcon: true,
                               textInputType: TextInputType.none,

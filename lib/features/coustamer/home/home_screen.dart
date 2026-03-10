@@ -3,9 +3,8 @@ import 'package:fils/features/coustamer/home/app_bar_home.dart';
 import 'package:fils/features/coustamer/home/category_section.dart';
 import 'package:fils/features/coustamer/home/last_auction.dart';
 import 'package:fils/features/coustamer/home/new_product.dart';
-import 'package:fils/features/coustamer/home/suggest_product.dart';
 import 'package:fils/features/coustamer/search/item_search.dart';
-import 'package:fils/utils/storage.dart';
+ import 'package:fils/utils/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                // SizedBox(height: heigth * 0.02),
                // ItemRelatedProductHome(data: homeResponse),
                 SizedBox(height: heigth * 0.02),
-                 SuggestProduct(),
+               // SuggestProduct(),
                 SizedBox(height: heigth * 0.04),
               ],
             ),

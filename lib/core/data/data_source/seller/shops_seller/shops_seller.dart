@@ -37,7 +37,7 @@ class ShopsSellerDataSourceImpl implements ShopsSellerDataSource {
       fileFieldName: "tax_papers",
       isMultipart: file != null ? true : false,
       data: data,
-      file: file,
+      file:file,
     );
   }
 

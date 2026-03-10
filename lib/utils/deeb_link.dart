@@ -2,7 +2,8 @@
 
 import 'dart:async';
 import 'package:app_links/app_links.dart';
-import 'package:fils/utils/navigation_service/navigation_server.dart';
+import 'package:fils/route/app_routes.dart';
+import 'package:fils/route/control_route.dart';
 import 'package:flutter/material.dart';
 
 class AppLinkHandler {
@@ -22,13 +23,11 @@ class AppLinkHandler {
       }
     } catch (_) {}
 
-    _subscription = _appLinks.uriLinkStream.listen(
-      (uri) {
-        if (uri != null) {
-          _pendingUri = uri;
-        }
-      },
-    );
+    _subscription = _appLinks.uriLinkStream.listen((uri) {
+      if (uri != null) {
+        _pendingUri = uri;
+      }
+    });
   }
 
   /// 🔥 استدعِ هذه بعد انتهاء Splash / تحميل البيانات
@@ -60,23 +59,24 @@ class AppLinkHandler {
       case 'store':
         _openStore(id);
         break;
+      case 'auction':
+        _openAuction(id);
+        break;
     }
   }
 
   /// 🛒 صفحة المنتج
-  static void _openProduct(String id) {
-    NavigationService.navigatorKey.currentState?.pushNamed(
-      '/product',
-      arguments: int.tryParse(id),
-    );
+  static void _openProduct(dynamic id) {
+    To(AppRoutes.detailsProductRoot, arguments: id);
+  }
+
+  static void _openAuction(dynamic id) {
+    To(AppRoutes.detailsAuction, arguments: id);
   }
 
   /// 🏬 صفحة المتجر
-  static void _openStore(String id) {
-    NavigationService.navigatorKey.currentState?.pushNamed(
-      '/store',
-      arguments: id,
-    );
+  static void _openStore(dynamic id) {
+    To(AppRoutes.allProductStore, arguments: [id, ""]);
   }
 
   static void dispose() {

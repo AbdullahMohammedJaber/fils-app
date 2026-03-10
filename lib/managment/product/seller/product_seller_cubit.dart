@@ -41,8 +41,6 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
     );
   }
 
-  
-
   removeProductImage() {
     emit(
       ProductSellerState.clearAttachment(
@@ -100,6 +98,51 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
     }
   }
 
+  functionSelectMultiImage(BuildContext context) async {
+    try {
+      emit(
+        state.copyWith(
+          loadingUploadImages: true,
+
+          imageProducts: null,
+          imageIds: null,
+          categoryIds: state.categoryIds,
+        ),
+      );
+      final result = await pickAndUploadMultiImages(
+        context: context,
+        endpoint: "file/upload",
+        fileKey: "aiz_file",
+        seller: true,
+      );
+      if (result != null) {
+        emit(
+          state.copyWith(
+            loadingUploadImages: false,
+            imageProducts: result.map((e) => e.file).toList(),
+            imageIds: result.map((e) => e.imageId).toList(),
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            loadingUploadImages: false,
+            imageProducts: null,
+            imageIds: null,
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          loadingUploadImages: false,
+          imageProducts: null,
+          imageIds: null,
+        ),
+      );
+    }
+  }
+
   changeTyoeSelectColor(bool value) {
     if (value == true && state.colorList == null) {
       getColorList();
@@ -122,7 +165,7 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
 
     result.handle(
       onSuccess: (data) {
-        emit(state.copyWith(colorList:List.from(data.data) ));
+        emit(state.copyWith(colorList: List.from(data.data)));
       },
       onFailed: (message) {
         showMessage(message, value: false);
@@ -140,8 +183,7 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
 
     result.handle(
       onSuccess: (data) {
-        emit(state.copyWith(sizeList:List.from(data.data[0].values) ));
-
+        emit(state.copyWith(sizeList: List.from(data.data[0].values)));
       },
       onFailed: (message) {
         showMessage(message, value: false);
@@ -151,25 +193,27 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
       },
     );
   }
- selectColorId(ColorProduct color) {
-    dynamic index = state.colorSelect.indexWhere((element) => element.id == color.id);
+
+  selectColorId(ColorProduct color) {
+    dynamic index = state.colorSelect.indexWhere(
+      (element) => element.id == color.id,
+    );
 
     if (index != -1) {
-
       state.colorSelect[index].isSelect = false;
       state.colorSelect.removeAt(index);
-      emit(state.copyWith(colorSelect: state.colorSelect ));
+      emit(state.copyWith(colorSelect: state.colorSelect));
     } else {
       color.isSelect = true;
       state.colorSelect.add(color);
-      emit(state.copyWith(colorSelect: state.colorSelect ));
-
+      emit(state.copyWith(colorSelect: state.colorSelect));
     }
-     
-    
   }
- selectSizeId(Value size) {
-    dynamic index = state.sizeSelect.indexWhere((element) => element.id == size.id);
+
+  selectSizeId(Value size) {
+    dynamic index = state.sizeSelect.indexWhere(
+      (element) => element.id == size.id,
+    );
 
     if (index != -1) {
       state.sizeSelect[index].isSelect = false;
@@ -178,7 +222,7 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
       size.isSelect = true;
       state.sizeSelect.add(size);
     }
-   emit(state.copyWith(sizeSelect: state.sizeSelect ));
+    emit(state.copyWith(sizeSelect: state.sizeSelect));
   }
 
   Future<void> addProduct(
@@ -192,11 +236,11 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
     List<int> _categoryIds = state.categoryIds;
     _categoryIds.add(state.idCategory ?? 0);
     emit(state.copyWith(loading: true, categoryIds: _categoryIds));
-
+    String images = state.imageIds?.join(",") ?? "";
     final result = await UserCaseSeller().productSellerUseCase.callAddProduct(
       data: {
         "name": name,
-
+        "photos": images,
         "tags": ["[{\"value\": \"$name\"}]"],
         "thumbnail_img": state.idImage,
         "shop_id": getMyShopsDetails().id,
@@ -206,9 +250,9 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
         "stock_visibility_state": "quantity",
         "cash_on_delivery": "1",
         "est_shipping_days": null,
-       "colors_active": state.colorSelect.isNotEmpty ? "1" : "0",
+        "colors_active": state.colorSelect.isNotEmpty ? "1" : "0",
         "colors":
-           state. colorSelect.isNotEmpty
+            state.colorSelect.isNotEmpty
                 ? state.colorSelect.map((e) {
                   return e.code;
                 }).toList()
@@ -245,7 +289,9 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
         clearForm();
         Navigator.pop(context);
         getAllProduct(refresh: true);
-        NavigationService.navigatorKey.currentContext!.read<HomeSellerCubit>().getHomeSelerRequest();
+        NavigationService.navigatorKey.currentContext!
+            .read<HomeSellerCubit>()
+            .getHomeSelerRequest();
       },
       onFailed: (message) {
         showMessage(message, value: false);
@@ -265,7 +311,7 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
       _page = 1;
       _hasMore = true;
       _products.clear();
-      emit(state.copyWith(loadingGetAllProduct: true , error: null));
+      emit(state.copyWith(loadingGetAllProduct: true, error: null));
     } else {
       if (!_hasMore || _loading) {
         return;

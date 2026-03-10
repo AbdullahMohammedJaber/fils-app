@@ -148,7 +148,6 @@ class DetailsProductRoot extends StatelessWidget {
                                 } else {
                                   showDialogAuth(context);
                                 }
-                                 
                               },
                               child: Container(
                                 height: 55,

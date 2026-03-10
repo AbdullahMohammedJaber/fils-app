@@ -44,14 +44,14 @@ class _ItemCategoryHomeState extends State<ItemCategoryHome> {
           "In the auction section, once you access it, you will find all the auctions and enjoy a distinctive, interactive, and secure bidding service."
               .tr(),
     ),
-    CustomButton(
+   /* CustomButton(
       label: 'Open Market'.tr(),
       color: kohliH,
       path: "assets/images/haraj.png",
       dec:
           "In the used goods section, you will find all used products, and you can purchase them by contacting the seller."
               .tr(),
-    ),
+    ),*/
  
   ];
 

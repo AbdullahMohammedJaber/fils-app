@@ -14,6 +14,9 @@ class AuctionSellerState {
   final int? idImage;
   final bool loadingForm;
   final bool typeNormal;
+   final List<File>  imageProducts;
+     final List<String>? imageIds; 
+     final bool loadingUploadImages;
   AuctionSellerState({
     this.loading = true,
     this.typeNormal = true,
@@ -27,6 +30,9 @@ class AuctionSellerState {
     this.imageProduct,
     this.idImage,
     this.loadingForm = false,
+    this.loadingUploadImages = false,
+    this.imageProducts = const [],
+    this.imageIds,
   });
   AuctionSellerState copyWith({
     bool? loading,
@@ -42,8 +48,14 @@ class AuctionSellerState {
     int? idImage,
     bool? loadingForm,
     bool? typeNormal,
+     List<File>? imageProducts,
+    List<String>? imageIds,
+    bool? loadingUploadImages,
   }) {
     return AuctionSellerState(
+        imageProducts: imageProducts ?? this.imageProducts,
+      imageIds: imageIds ?? this.imageIds,
+      loadingUploadImages: loadingUploadImages ?? this.loadingUploadImages,
       auctions: auctions ?? this.auctions,
       error: error,
       hasMore: hasMore ?? this.hasMore,
@@ -91,6 +103,14 @@ class AuctionSellerState {
       hasMore: false,
       error: null,
       loading: false,
+         imageProducts: const [],
+      imageIds: null,
+       loadingUploadImages: false,
     );
+  }
+  deleteImageAtIndex({required int index}) {
+
+    imageProducts.removeAt(index  ) ;
+    imageIds?.removeAt(index) ;
   }
 }
