@@ -28,74 +28,59 @@ class NotificationService {
   // Channel ID for Android
   final String _channelId = "fils";
 
-Future<void> init() async {
-  await _initLocalNotifications();
- final FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings =
-      await FirebaseMessaging.instance.requestPermission(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
+  Future<void> init() async {
+    await _initLocalNotifications();
+    final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await FirebaseMessaging.instance
+        .requestPermission(alert: true, badge: true, sound: true);
 
-  if (settings.authorizationStatus != AuthorizationStatus.authorized) {
-    return;
-  }
-   await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
- await messaging.setAutoInitEnabled(true);
- 
-  try {
-    if (Platform.isIOS) {
- 
-      await Future.delayed(const Duration(seconds: 2));
-
-      String? apnsToken =
-          await FirebaseMessaging.instance.getAPNSToken();
-
- 
-      if (apnsToken == null) {
-    
-        return;
-      }
-
-      
-      await setFcmToken(apnsToken); // خزنه في السيرفر أو SharedPrefs
-
-      String? fcmToken =
-          await FirebaseMessaging.instance.getToken();
-
-      if (fcmToken != null) {
- 
-        await setFcmToken(fcmToken);
-      }
-    } else {
-      // Android
-      String? fcmToken =
-          await FirebaseMessaging.instance.getToken();
-
-      if (fcmToken != null) {
-     
-        await setFcmToken(fcmToken);
-        await FirebaseMessaging.instance.subscribeToTopic("fils");
-      }
+    if (settings.authorizationStatus != AuthorizationStatus.authorized) {
+      return;
     }
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+    await messaging.setAutoInitEnabled(true);
 
-    // استماع لتحديث التوكن
-    FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
-   
-      await setFcmToken(newToken);
-    });
+    try {
+      if (Platform.isIOS) {
+        await Future.delayed(const Duration(seconds: 2));
 
-    _listenFCM();
-  } catch (e) {
- 
+        String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+
+        if (apnsToken == null) {
+          return;
+        }
+
+        await setFcmToken(apnsToken);
+
+        String? fcmToken = await FirebaseMessaging.instance.getToken();
+
+        if (fcmToken != null) {
+          await setFcmToken(fcmToken);
+        }
+      } else {
+        // Android
+        String? fcmToken = await FirebaseMessaging.instance.getToken();
+
+        if (fcmToken != null) {
+          await setFcmToken(fcmToken);
+          await FirebaseMessaging.instance.subscribeToTopic("fils");
+        }
+      }
+
+      // استماع لتحديث التوكن
+      FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
+        await setFcmToken(newToken);
+      });
+
+      _listenFCM();
+    } catch (e) {}
   }
-}
+
   Future<void> _initLocalNotifications() async {
     var androidSettings = const AndroidInitializationSettings(
       '@drawable/logo_noti',
