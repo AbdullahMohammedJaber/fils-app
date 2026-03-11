@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:fils/core/data/response/category/categoryResponse.dart';
 import 'package:fils/core/data/response/product/attrebute_response.dart';
 import 'package:fils/core/data/response/product/color_product.dart';
@@ -27,7 +26,7 @@ class EditProductCubit extends Cubit<EditProductState> {
     BuildContext context,
     DetailsProductSeller detailsProductSellerResponse,
   ) async {
-    List<Category> _category = [];
+    List<Category> category = [];
     await context.read<CategoryCubit>().functionFetchCategory();
     for (var element
         in context.read<CategoryCubit>().state.categoryResponse!.data) {
@@ -44,10 +43,10 @@ class EditProductCubit extends Cubit<EditProductState> {
       for (var element
           in context.read<CategoryCubit>().state.categoryResponse!.data) {
         if (detailsProductSellerResponse.categoryIds.contains(element.id)) {
-          _category.add(element);
+          category.add(element);
         }
       }
-      functionChangeCategoryListData(_category);
+      functionChangeCategoryListData(category);
     });
 
     emit(
@@ -155,9 +154,9 @@ class EditProductCubit extends Cubit<EditProductState> {
     required String discount,
     required String quantity,
   }) async {
-    List<int> _categoryIds = state.categoryIds!;
-    _categoryIds.add(state.idCategory ?? 0);
-    emit(state.copyWith(loading: true, categoryIds: _categoryIds));
+    List<int> categoryIds = state.categoryIds!;
+    categoryIds.add(state.idCategory ?? 0);
+    emit(state.copyWith(loading: true, categoryIds: categoryIds));
 
     final result = await UserCaseSeller().productSellerUseCase.callEditProduct(
       id: id,

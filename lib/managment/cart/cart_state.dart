@@ -17,7 +17,7 @@ class CartState {
   final PaymentMethode? paymentMethode;
   final OrderRequest? orderRequest;
 
-    CartState({
+    const CartState({
     this.pageTabBar = 1,
     this.tax = 0.0,
     this.cartListResponse,

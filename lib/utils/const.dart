@@ -21,26 +21,34 @@ showMessage(String message, {required bool value}) {
   }
 }
 
-void shareStoreLink(dynamic storeId) {
+void shareStoreLink(BuildContext context, dynamic storeId) {
   final link = "https://dashboard.fils.app/store/$storeId";
+  final box = context.findRenderObject() as RenderBox;
   Share.share(
     "قم بزيارة متجري :  $link",
     subject: "مشاركة رابط المتجر الخاص بك",
+    sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
   );
 }
 
-void shareProductLink(dynamic productId) {
+void shareProductLink(BuildContext context, dynamic productId) {
   final link = "https://dashboard.fils.app/product/$productId";
+final box = context.findRenderObject() as RenderBox;
   Share.share(
     "قم بزيارة منتجي :  $link",
     subject: "مشاركة رابط المنتج الخاص بك",
+    sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
   );
 }
 
-void shareAuctionLink(dynamic productId) {
+void shareAuctionLink(BuildContext context, dynamic productId) {
   final link = "https://dashboard.fils.app/auction/$productId";
+
+  final box = context.findRenderObject() as RenderBox;
+
   Share.share(
-    "قم بزيارة مزادي :  $link",
+    "قم بزيارة مزادي : $link",
     subject: "مشاركة رابط المزاد الخاص بك",
+    sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
   );
 }

@@ -26,7 +26,7 @@ initApp() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await EasyLocalization.ensureInitialized();
   await GetStorage.init();
-  await NotificationService().init();
+ // await NotificationService().init();
 
   FirebaseMessaging.onBackgroundMessage(NotificationService.firebaseMessagingBackgroundHandler);
 
@@ -39,7 +39,7 @@ initApp() async {
         supportedLocales: [...localList],
         child: DevicePreview(
           builder: (context) => MyApp(),
-          enabled: !kReleaseMode,
+          enabled: false,
 
 
           ),
@@ -73,7 +73,7 @@ class _InitAppScreenState extends State<InitAppScreen> {
           builder: (context, LanguageState languageState) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'FILS',
+              title: 'fils',
               theme: getApplicationTheme(),
               darkTheme: getApplicationThemeDark(),
               localizationsDelegates: context.localizationDelegates,
@@ -87,7 +87,7 @@ class _InitAppScreenState extends State<InitAppScreen> {
               builder: (context, child) {
                 child = botToastBuilder(context, child);
                 return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                  data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
                   child: Scaffold(
                     body: Stack(children: [child]),
 

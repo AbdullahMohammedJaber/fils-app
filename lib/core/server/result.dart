@@ -62,7 +62,7 @@ class ApiResult<T> {
     void Function()? onNoInternet,
   }) {
     if (isSuccess && data != null) {
-      onSuccess(data!);
+      onSuccess(data as T);
     } else if (isFailed) {
       if (onFailed != null) onFailed(message ?? StringApp.noInternet.tr());
     } else if (isNoInternet) {

@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/core/data/response/auction/auction_seller_response.dart';
 import 'package:fils/core/data/response/category/categoryResponse.dart';
@@ -24,7 +23,7 @@ class AuctionSellerCubit extends Cubit<AuctionSellerState> {
 
   bool _loading = true;
   bool _hasMore = true;
-  List<AuctionSeller> _items = [];
+  final List<AuctionSeller> _items = [];
   int _page = 1;
   Future<void> fetchAllAuction({bool refresh = false}) async {
     if (refresh) {
@@ -171,10 +170,10 @@ class AuctionSellerCubit extends Cubit<AuctionSellerState> {
       );
      
     } else {
-       List<int > _ids = [];
-      _ids.add(state.idCategory!);
+       List<int > ids = [];
+      ids.add(state.idCategory!);
       for (var element in state.categoresId!) {
-        _ids.add(element);
+        ids.add(element);
       }
       emit(state.copyWith(loadingForm: true));
       final result = await UserCaseSeller().auctionSellerUseCase.addAuctionSeller(
@@ -194,7 +193,7 @@ class AuctionSellerCubit extends Cubit<AuctionSellerState> {
           "auction_date_range":
               "${formatDate2(dataStart)} ${formatTimeOfDay2(timeStart)} to ${formatDate2(dataEnd)} ${formatTimeOfDay2(timeEnd)}",
           "category_ids":
-              _ids.map((e) {
+              ids.map((e) {
                 return e;
               }).toList(),
           "category_id": state.idCategory,

@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/core/data/response/product/details_product_response.dart';
 import 'package:fils/core/user_case_state/coustomer/use_case_state.dart';

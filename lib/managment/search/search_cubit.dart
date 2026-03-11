@@ -3,7 +3,6 @@ import 'package:fils/core/data/response/product/item_product.dart';
 import 'package:fils/core/user_case_state/coustomer/use_case_state.dart';
 import 'package:fils/utils/string.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 part 'search_state.dart';
 
@@ -117,7 +116,7 @@ class SearchCubit extends Cubit<SearchState> {
   bool _loading = false;
   bool _hasMore = true;
   int _page = 1;
-  List<ProductListModel> _items = [];
+  final List<ProductListModel> _items = [];
 
   Future<void> getDataSearch({
     bool refresh = false,

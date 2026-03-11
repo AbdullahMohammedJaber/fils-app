@@ -12,7 +12,7 @@ class NotificationCubit extends Cubit<NotificationState> {
   bool _loading = false;
   bool _hasMore = true;
   int _page = 1;
-  List<Notifications> _items = [];
+  final List<Notifications> _items = [];
 
   Future<void> getAllNotification({bool refresh = false}) async {
     if (refresh) {

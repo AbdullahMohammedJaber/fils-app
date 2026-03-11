@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             if (getUser()!.user!.type == "seller")
                               IconButton(
                                 onPressed: () {
-                                  shareStoreLink(
+                                  shareStoreLink(context ,
                                     getMyShopsDetails().id.toString(),
                                   );
                                 },

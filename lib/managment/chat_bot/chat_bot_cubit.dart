@@ -9,7 +9,7 @@ part 'chat_bot_state.dart';
 class ChatBotCubit extends Cubit<ChatBotState> {
   ChatBotCubit() : super(ChatBotState());
 
-  List<ChatBotModel> _list = [];
+  final List<ChatBotModel> _list = [];
 
   Future<void> sendBot({required String message}) async {
     if (message.isNotEmpty) {

@@ -18,7 +18,7 @@ import '../../../utils/manage_file_widget/manage_file_widget.dart';
 import '../search/store/dialog_show_category.dart';
 
 class FormAddHaraj extends StatefulWidget {
-  FormAddHaraj({super.key});
+  const FormAddHaraj({super.key});
 
   @override
   State<FormAddHaraj> createState() => _FormAddHarajState();

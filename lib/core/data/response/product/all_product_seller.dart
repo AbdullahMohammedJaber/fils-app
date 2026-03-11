@@ -103,7 +103,7 @@ class ProductSeller {
     featured: json["featured"],
     basePrice: json["base_price"],
     baseDiscountedPrice: json["base_discounted_price"],
-    unit: json["unit"]==null ? "" :json["unit"] ,
+    unit: json["unit"] ?? "" ,
     discount: json["discount"],
     discountType: json["discount_type"],
     rating: json["rating"],

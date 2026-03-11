@@ -105,7 +105,7 @@ class BestProduct {
         baseDiscountedPrice: json["base_discounted_price"],
         todaysDeal: json["todays_deal"],
         featured: json["featured"],
-        unit: json["unit"]==null ? "" : json["unit"],
+        unit: json["unit"] ?? "",
         discount: json["discount"],
         discountType: json["discount_type"],
         rating: json["rating"],

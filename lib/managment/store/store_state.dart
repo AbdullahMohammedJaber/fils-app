@@ -26,7 +26,7 @@ class StoreState {
   final bool hasMoreStoreCategory;
   final List<Store>? itemsStoreCategory;
 
-  StoreState({
+  const StoreState({
     // All Store
     this.loading = true,
     this.items,

@@ -87,6 +87,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     ItemOrder(
                                       orders: orders[index],
                                       status: state.pageTapBar,
+                                      index: index  ,
                                     ),
                                     orders[index].isShow
                                         ? TrackingScreen(
@@ -99,7 +100,7 @@ class _OrderScreenState extends State<OrderScreen> {
                               },
 
                               physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               itemCount:
                                   state.hasMore
                                       ? orders.length + 1

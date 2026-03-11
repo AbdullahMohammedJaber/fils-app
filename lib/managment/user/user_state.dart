@@ -9,6 +9,6 @@ class UserState {
   const  UserState({this.greeting = '', this.idImageProfile});
 
   UserState copyWith({required String? greet,   int? idImageProfile}) {
-    return UserState(greeting: greet ?? this.greeting, idImageProfile: idImageProfile ?? this.idImageProfile);
+    return UserState(greeting: greet ?? greeting, idImageProfile: idImageProfile ?? this.idImageProfile);
   }
 }

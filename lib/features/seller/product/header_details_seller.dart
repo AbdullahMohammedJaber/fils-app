@@ -149,7 +149,7 @@ class _HeaderDetailsSellerProductState
                     ),
                     GestureDetector(
                       onTap: () async {
-                        shareProductLink(widget.details.id);
+                        shareProductLink(context ,widget.details.id);
                       },
                       child: Container(
                         height: 45,

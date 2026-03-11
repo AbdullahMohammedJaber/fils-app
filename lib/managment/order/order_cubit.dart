@@ -32,7 +32,7 @@ class OrderCubit extends Cubit<OrderState> {
   int _page = 1;
   bool _loading = true;
   bool _hasMore = true;
-  List<Orders> _items = [];
+  final List<Orders> _items = [];
 
   Future<void> getOrder({bool refresh = false}) async {
     if (refresh) {
@@ -64,5 +64,16 @@ class OrderCubit extends Cubit<OrderState> {
         emit(state.copyWith(error: message));
       },
     );
+  }
+
+  void changeShowDetailsOrder(int index ,Orders orders) {
+    if (orders.isShow == false) {
+      orders.isShow = true;
+    } else {
+      orders.isShow = false;
+    }
+   
+    state.orderList![index] = orders;
+    emit(state.copyWith(orderList: List.from(state.orderList!)));
   }
 }

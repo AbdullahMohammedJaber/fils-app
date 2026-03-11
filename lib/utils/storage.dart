@@ -142,7 +142,7 @@ setTimeZoon(String zoon) {
 }
 
 String? getTimeZoon() {
-  return GetStorage().read("zoon") ?? null;
+  return GetStorage().read("zoon");
 }
 
 //////////////////////////////////////

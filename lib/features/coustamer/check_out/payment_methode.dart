@@ -18,7 +18,6 @@ class PaymentMethode extends StatefulWidget {
 }
 
 class _PaymentMethodeState extends State<PaymentMethode> {
-  
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CartCubit, CartState>(
@@ -97,10 +96,11 @@ class _PaymentMethodeState extends State<PaymentMethode> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                                 color:
-                                    state.paymentMethodResponse!
-                                            .data[index]
-                                            .paymentTypeKey ==
-                                        state.paymentMethode?.paymentTypeKey
+                                    state
+                                                .paymentMethodResponse!
+                                                .data[index]
+                                                .paymentTypeKey ==
+                                            state.paymentMethode?.paymentTypeKey
                                         ? primaryDarkColor
                                         : Colors.transparent,
                               ),
@@ -132,7 +132,6 @@ class _PaymentMethodeState extends State<PaymentMethode> {
                           onTap: () async {
                             if (state.paymentMethode == null) {
                               showMessage(
-
                                 "Please Select Payment Methode".tr(),
                                 value: false,
                               );

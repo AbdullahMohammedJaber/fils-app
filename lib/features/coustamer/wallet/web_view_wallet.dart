@@ -31,11 +31,16 @@ class _PaymentWebViewWalletState extends State<PaymentWebViewWallet> {
                 if (url.contains('https://dashboard.fils.app/api')) {
                   String baseUrl = "https://dashboard.fils.app/api/v1/";
                   String remainingUrl = url.replaceFirst(baseUrl, "");
+                  Navigator.pop( context );
+
                    context.read<WalletCubit>().functionWebView(
                     url: remainingUrl,
                     paymentType: widget.paymentType,
                   ); 
                 }
+              },
+              onPageFinished: (url) {
+                Navigator.pop(context);
               },
             ),
           )

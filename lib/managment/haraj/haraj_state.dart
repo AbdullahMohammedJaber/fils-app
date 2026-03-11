@@ -71,7 +71,7 @@ class HarajState {
       hasMore: hasMore ?? this.hasMore,
       hasMoreHarajInCategory:
           hasMoreHarajInCategory ?? this.hasMoreHarajInCategory,
-      products: product ?? this.products,
+      products: product ?? products,
 
       productInCategory: productInCategory,
       detailsOpenMarketResponse: detailsOpenMarketResponse,

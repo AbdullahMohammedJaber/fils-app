@@ -39,7 +39,7 @@ class AuctionCubit extends Cubit<AuctionState> {
   int _page = 1;
   bool _haseMore = false;
   bool _loading = false;
-  List<AuctionResponse> _items = [];
+  final List<AuctionResponse> _items = [];
 
   Future<void> getAllAuction({refresh = false}) async {
     if (refresh) {
@@ -80,7 +80,7 @@ class AuctionCubit extends Cubit<AuctionState> {
   int _pageAuctionCategory = 1;
   bool _haseMoreAuctionCategory = false;
   bool _loadingAuctionCategory = false;
-  List<AuctionResponse> _itemsAuctionCategory = [];
+  final List<AuctionResponse> _itemsAuctionCategory = [];
 
   Future<void> getAllAuctionCategory({
     refresh = false,
@@ -164,22 +164,10 @@ class AuctionCubit extends Cubit<AuctionState> {
 
   changeListenerToPriceBid() {
     totalPriceBid = 0.0;
-    List<double> bidAmounts = [];
-    if(state.bids.isNotEmpty){
-      for (var element in state.bids) {
-        bidAmounts.add(extractDouble(element.bid.amount));
-      }
-      totalPriceBid = bidAmounts[0];
-
-      for (int i = 0; i < bidAmounts.length; i++) {
-        if (bidAmounts[i] > totalPriceBid) {
-          totalPriceBid = bidAmounts[i];
-        }
-      }
+    for (var element in state.bids) {
+      totalPriceBid += extractDouble(element.bid.amount);
     }
-   
-
-    emit(state.copyWith(totalPriceBid: totalPriceBid));
+    emit(state.copyWith(totalPriceBid: this.totalPriceBid));
   }
 
   void fetchBids(dynamic auctionId) {
@@ -569,11 +557,11 @@ class AuctionCubit extends Cubit<AuctionState> {
         value: false,
       );
     } else {
-      List<int> _ids = [];
-      state.categoresId!.forEach((element) {
-        _ids.add(element);
-      });
-      _ids.add(state.idCategory!);
+      List<int> ids = [];
+      for (var element in state.categoresId!) {
+        ids.add(element);
+      }
+      ids.add(state.idCategory!);
 
       emit(state.copyWith(loadingForm: true));
       final result = await UserCase().auctionUserCase.addAuction(
@@ -593,7 +581,7 @@ class AuctionCubit extends Cubit<AuctionState> {
           "auction_date_range":
               "${formatDate2(dataStart)} ${formatTimeOfDay2(timeStart)} to ${formatDate2(dataEnd)} ${formatTimeOfDay2(timeEnd)}",
           "category_ids":
-              _ids.map((e) {
+              ids.map((e) {
                 return e;
               }).toList(),
           "category_id": state.idCategory,

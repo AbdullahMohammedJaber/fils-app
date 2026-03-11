@@ -13,7 +13,6 @@ import 'package:fils/utils/setting_ui/loading_ui.dart';
 import 'package:fils/utils/storage.dart';
 import 'package:fils/utils/string.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 
 import '../../utils/global_function/attachment_manage.dart';
 
@@ -25,7 +24,7 @@ class HarajCubit extends Cubit<HarajState> {
   bool _hasMore = false;
   bool _loading = false;
   int _page = 1;
-  List<MarketOpenResponse> _items = [];
+  final List<MarketOpenResponse> _items = [];
 
   Future<void> getAllHaraj({bool refresh = false}) async {
     if (refresh) {
@@ -216,7 +215,7 @@ class HarajCubit extends Cubit<HarajState> {
   bool _hasMoreHarajInCategory = false;
   bool _loadingHarajInCategory = false;
   int _pageHarajInCategory = 1;
-  List<MarketOpenResponse> _itemsHarajInCategory = [];
+  final List<MarketOpenResponse> _itemsHarajInCategory = [];
 
   Future<void> getHarajInCategory({
     bool refresh = false,

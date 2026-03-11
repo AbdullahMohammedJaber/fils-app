@@ -34,9 +34,7 @@ class NotificationService {
     NotificationSettings settings = await FirebaseMessaging.instance
         .requestPermission(alert: true, badge: true, sound: true);
 
-    if (settings.authorizationStatus != AuthorizationStatus.authorized) {
-      return;
-    }
+    // iOS: show alert, badge, sound even in foreground
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
           alert: true,

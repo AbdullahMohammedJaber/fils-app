@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/core/data/response/wallet/wallet_seller.dart';
 import 'package:fils/core/server/dio_helper.dart';

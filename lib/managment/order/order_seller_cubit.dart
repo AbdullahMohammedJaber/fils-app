@@ -17,7 +17,7 @@ class OrderSellerCubit extends Cubit<OrderSellerState> {
   bool _loading = true;
   bool _hasMore = true;
   int _page = 1;
-  List<OrderSeeler> _items = [];
+  final List<OrderSeeler> _items = [];
   Future<void> getOrders({refresh = false}) async {
     if (refresh) {
       _page = 1;
@@ -66,8 +66,8 @@ class OrderSellerCubit extends Cubit<OrderSellerState> {
     final result =await UserCaseSeller().orderSellerUseCase.getShppingAddress();
     emit(state.copyWith(loadingListShippingAddress: false ));
     result.handle(onSuccess: (data) {
-       final _items = data.data;
-       emit(state.copyWith(listShippingAddress: List.from(_items!)));
+       final items = data.data;
+       emit(state.copyWith(listShippingAddress: List.from(items!)));
     },
     onFailed: (message) {
       emit(state.copyWith(errorListShippingAddress: message));

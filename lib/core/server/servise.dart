@@ -1,4 +1,4 @@
-bool testMode = false;
+bool testMode = true;
 
 class ApiService {
   ApiService._();

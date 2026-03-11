@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:fils/core/data/response/category/categoryResponse.dart';
 import 'package:fils/core/data/response/product/all_product_seller.dart';
 import 'package:fils/core/data/response/product/attrebute_response.dart';
@@ -305,7 +304,7 @@ class ProductSellerCubit extends Cubit<ProductSellerState> {
   bool _loading = true;
   bool _hasMore = true;
   int _page = 1;
-  List<ProductSeller> _products = [];
+  final List<ProductSeller> _products = [];
   Future<void> getAllProduct({bool refresh = false}) async {
     if (refresh) {
       _page = 1;

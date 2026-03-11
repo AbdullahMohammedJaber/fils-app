@@ -133,7 +133,7 @@ class _ItemBannerDetailsAuctionState extends State<ItemBannerDetailsAuction> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    shareAuctionLink(widget.data.id);
+                    shareAuctionLink(context ,widget.data.id);
                   },
                   child: Container(
                     height: 45,

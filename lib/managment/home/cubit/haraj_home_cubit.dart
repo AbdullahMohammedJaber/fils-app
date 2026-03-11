@@ -12,7 +12,7 @@ class HarajHomeCubit extends Cubit<HarajHomeState> {
   bool _hasMore = false;
   bool _loading = false;
   int _page = 1;
-  List<MarketOpenResponse> _items = [];
+  final List<MarketOpenResponse> _items = [];
 
   Future<void> getAllHaraj({bool refresh = false}) async {
     if (refresh) {

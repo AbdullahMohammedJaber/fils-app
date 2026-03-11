@@ -20,7 +20,7 @@ class HarajHomeState {
       loading: loading ?? this.loading,
       error: error,
 hasMore: hasMore??this.hasMore,
-      products: product ?? this.products,
+      products: product ?? products,
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/core/server/dio_helper.dart';
 import 'package:fils/core/user_case_state/coustomer/use_case_state.dart';
@@ -101,7 +100,7 @@ class WalletCubit extends Cubit<WalletState> {
   }) async {
     final DioClient dioClient = DioClient();
     bool success = false;
-    Navigator.pop(NavigationService.navigatorKey.currentContext! );
+   // Navigator.pop(NavigationService.navigatorKey.currentContext! );
     showBoatToast();
     final response = await dioClient.request(path: url, method: 'GET');
     closeAllLoading();
