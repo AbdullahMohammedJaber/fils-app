@@ -214,7 +214,11 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(isShowPasswordSignup: !state.isShowPasswordSignup));
     }
   }
-
+  changeVisibalePasswordConfirm() {
+    
+      emit(state.copyWith(isShowPasswordSignupConfirm: !state.isShowPasswordSignupConfirm));
+  
+  }
   Future<void> editProfile({
     String? name,
     String? email,

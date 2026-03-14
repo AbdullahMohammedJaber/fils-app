@@ -4,7 +4,7 @@ import 'package:fils/managment/home/home_seller_cubit.dart';
 import 'package:fils/managment/shops/shops_cubit.dart';
 import 'package:fils/route/app_routes.dart';
 import 'package:fils/route/control_route.dart';
- 
+
 import 'package:fils/utils/storage.dart';
 import 'package:fils/utils/widget/defulat_text.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +19,7 @@ class LastAuctionSeller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeSellerCubit, HomeSellerState>(
-      listener: (context, state) {
-     
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -52,13 +50,13 @@ class LastAuctionSeller extends StatelessWidget {
                         const SizedBox(width: 2),
                         GestureDetector(
                           onTap: () async {
-                            
-                            if (getPackageInfo()!.data == null) {
-                           
+                            if (getMyShopsDetails().id == 0) {
+                              showMessage(
+                                "Please Select your Shop".tr(),
+                                value: false,
+                              );
+                            } else if (getPackageInfo()!.data == null) {
                               context.read<ShopsCubit>().getAllShops();
-                            
-                            } else if(getMyShopsDetails().id==0){
-                              showMessage("Please Select your Shop".tr(), value: false);
                             } else {
                               ToWithFade(AppRoutes.formAddAuctionSeller);
                             }

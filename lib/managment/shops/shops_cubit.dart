@@ -31,7 +31,7 @@ class ShopsCubit extends Cubit<ShopsState> {
         onSuccess: (data) {
           if (data.data.data.isEmpty) {
             whereShopEmpty();
-            getInfoPakage();
+           // getInfoPakage();
           } else {
             emit(state.copyWith(isLoading: false, shopsResponse: data));
             setMyShopsDetails(data.data.data.first);

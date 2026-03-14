@@ -53,14 +53,14 @@ class LastProductSeller extends StatelessWidget {
                         const SizedBox(width: 2),
                         GestureDetector(
                           onTap: () async {
-                            if (getPackageInfo() == null) {
-                              context.read<ShopsCubit>().getAllShops();
-                            } else if (getMyShopsDetails().id == 0) {
+                           if (getMyShopsDetails().id == 0) {
                               showMessage(
                                 "Please Select your Shop".tr(),
                                 value: false,
                               );
-                            } else {
+                            }else  if (getPackageInfo() == null) {
+                              context.read<ShopsCubit>().getAllShops();
+                            }  else {
                               ToWithFade(AppRoutes.formAddProduct);
                             }
                           },

@@ -101,20 +101,20 @@ class _CategorySectionSellerState extends State<CategorySectionSeller> {
                   }
                 }
                 if (index == 3) {
-                  if (getPackageInfo() == null) {
-                    context.read<ShopsCubit>().whenCreateStore();
-                  } else if (getMyShopsDetails().id == 0) {
+                 if (getMyShopsDetails().id == 0) {
                     showMessage("Please Select your Shop".tr(), value: false);
-                  } else {
+                  }else  if (getPackageInfo() == null) {
+                    context.read<ShopsCubit>().whenCreateStore();
+                  }  else {
                     ToWithFade(AppRoutes.formAddProduct);
                   }
                 }
 
                 if (index == 4) {
-                  if (getPackageInfo() == null) {
-                    context.read<ShopsCubit>().whenCreateStore();
-                  } else if (getMyShopsDetails().id == 0) {
+                 if (getMyShopsDetails().id == 0) {
                     showMessage("Please Select your Shop".tr(), value: false);
+                  }  else if (getPackageInfo() == null) {
+                    context.read<ShopsCubit>().whenCreateStore();
                   } else {
                     ToWithFade(AppRoutes.formAddAuctionSeller);
                   }

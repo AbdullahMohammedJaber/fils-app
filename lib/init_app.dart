@@ -15,7 +15,7 @@ import 'package:fils/utils/storage.dart';
 import 'package:fils/utils/theme/dark_theme.dart';
 import 'package:fils/utils/theme/theme_manager.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
+ 
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +26,7 @@ initApp() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await EasyLocalization.ensureInitialized();
   await GetStorage.init();
- // await NotificationService().init();
+  await NotificationService().init();
 
   FirebaseMessaging.onBackgroundMessage(NotificationService.firebaseMessagingBackgroundHandler);
 

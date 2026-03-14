@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable
 
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/managment/app_manage/app_cubit.dart';
 import 'package:fils/managment/auth_manage/auth_cubit.dart';
@@ -229,11 +231,11 @@ class _SignupScreenState extends State<SignupScreen> {
                             controller: confirmPassword,
                             isPreffix: true,
                             hintText: "Confirm Password".tr(),
-                            isShow: state.isShowPasswordSignup,
+                            isShow: state.isShowPasswordSignupConfirm,
                             pathIconPrefix: "assets/icons/lock.svg",
                             isIcon: true,
                             ontapIcon: () {
-                              controller.changeVisibalePassword(isLogin: false);
+                              controller.changeVisibalePasswordConfirm();
                             },
                             textInputType: TextInputType.visiblePassword,
                             pathIcon: "assets/icons/eye-slash.svg",
@@ -319,6 +321,32 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ],
                     ),
+                     DefaultText("OR".tr()),
+                    SizedBox(height: heigth * 0.02),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: buildSocialMediaAuth(
+                        path: "assets/icons/google.svg",
+                        onTap: () async {
+                          context.read<AuthCubit>().signInGoogle();
+                        },
+                      ),
+                    ),
+                    if (Platform.isIOS)
+                      Column(
+                        children: [
+                          SizedBox(height: heigth * 0.015),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: buildSocialMediaAuth(
+                              path: "assets/icons/apple.svg",
+                              onTap: () async {
+                                context.read<AuthCubit>().signInApple();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     SizedBox(height: heigth * 0.08),
                   ],
                 ),

@@ -13,6 +13,8 @@ class AuthState {
   final SignupRequest? signupRequest;
    final bool isShowPassword;
   final bool isShowPasswordSignup;
+  final bool isShowPasswordSignupConfirm;
+
   final bool loadingEditProfile;
   final bool loadingForgetPassword;
   final bool loadingVerifyCodeForgetPassword;
@@ -21,6 +23,7 @@ class AuthState {
     this.loadingLogin = false,
     this.loadingEditProfile = false,
     this.isShowPasswordSignup = true,
+    this.isShowPasswordSignupConfirm = true,
      this.loadingSignup = false,
     this.loadingVerifyCodeForgetPassword = false,
     this.loadingConfirmCode = false,
@@ -45,11 +48,13 @@ class AuthState {
     SignupRequest? signupRequest,
      bool? isShowPassword,
     bool? isShowPasswordSignup,
+    bool? isShowPasswordSignupConfirm,
     bool? loadingForgetPassword,
     bool? loadingCreateNewPassword,
   }) {
     return AuthState(
       loadingLogin: loadingLogin ?? this.loadingLogin,
+      
       userType: userType ?? this.userType,
       check: check ?? this.check,
       loadingEditProfile: loadingEditProfile ?? this.loadingEditProfile,
@@ -58,6 +63,8 @@ class AuthState {
        loadingSignup: loadingSignup ?? this.loadingSignup,
       loadingConfirmCode: loadingConfirmCode ?? this.loadingConfirmCode,
       isShowPassword: isShowPassword ?? this.isShowPassword,
+      isShowPasswordSignupConfirm:
+          isShowPasswordSignupConfirm ?? this.isShowPasswordSignupConfirm,
       isShowPasswordSignup: isShowPasswordSignup ?? this.isShowPasswordSignup,
       loadingForgetPassword:
           loadingForgetPassword ?? this.loadingForgetPassword,

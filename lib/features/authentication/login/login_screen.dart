@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fils/core/data/request/auth/login.dart';
 import 'package:fils/managment/app_manage/app_cubit.dart';
@@ -53,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     SizedBox(width: width, height: heigth * 0.02),
-                    ItemBack(title: "SIGN IN".tr() , isBack: false,),
+                    ItemBack(title: "SIGN IN".tr(), isBack: false),
                     SizedBox(width: width, height: heigth * 0.07),
 
                     Column(
@@ -212,6 +214,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
+                    DefaultText("OR".tr()),
+                    SizedBox(height: heigth * 0.02),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: buildSocialMediaAuth(
+                        path: "assets/icons/google.svg",
+                        onTap: () async {
+                          context.read<AuthCubit>().signInGoogle();
+                        },
+                      ),
+                    ),
+                    if (Platform.isIOS)
+                      Column(
+                        children: [
+                          SizedBox(height: heigth * 0.015),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: buildSocialMediaAuth(
+                              path: "assets/icons/apple.svg",
+                              onTap: () async {
+                                context.read<AuthCubit>().signInApple();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
                     SizedBox(height: heigth * 0.08),
                   ],
                 ),
